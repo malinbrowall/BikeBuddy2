@@ -1,0 +1,118 @@
+<!-- views/layouts/main.handlebars -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="User Authentication">
+  <meta name="author" content="">
+
+  
+<link rel="icon" href="favicon.png">
+
+      <title>Malmo bicycle</title>
+
+  <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <nav class="navbar navbar-default" role="navigation">
+      <div class="container-fluid">
+
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li>
+              {{#if user}}
+                <p class="navbar-text">
+                  <strong>Hi,</strong> 
+                  {{user.username}}
+
+          <li><a href="/">Home</a></li>
+         <li><a href="/contact">Contact</a></li>
+        <li><a href="/maps">Map</a></li>
+        <li><a href="/info">Info</a></li>
+                </p>
+                </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                  <li>
+                    <a href="/logout">Log Out</a>
+                  </li>
+              {{else}}
+                <a href="/signin">Sign In</a>
+                <li><a href="/info">Info</a></li>
+                 <li><a href="/contact">Contact</a></li>
+                </li>
+              {{/if}}
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+
+
+      
+    {{#if error}}
+      <p class="alert alert-warning">{{error}}</p>
+    {{/if}}
+
+    {{#if success}}
+      <p class="alert alert-success">{{success}}</p>
+    {{/if}}
+
+    {{#if notice}}
+      <p class="alert alert-info">{{notice}}</p>
+    {{/if}}
+
+
+                   <footer>
+<div class="footer navbar-fixed-bottom">
+  <div class="container text-center">
+    <p class="pull-left">© 2016 Malmö Högskola, Inc. All Rights Reserved</p>
+    <ul class="pull-right list-inline">
+      <li><a href="http://www.malmotown.com">Malmö stad</a></li>
+      <li><a href="http://mah.se">MAH</a></li>
+    </ul>
+  </div>
+</div>
+</footer>
+
+    <!--where our other templates will insert-->
+    {{{body}}}
+  
+
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+
+    <!-- Latest compiled and minified JavaScript -->
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+   <link rel="stylesheet" type="text/css" href="style.css">     
+
+
+
+</body>
+</html>
