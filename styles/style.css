@@ -21,9 +21,22 @@ h1{
 text-align: center;
 }
 
+.jumbotron {
+  display: flex;  
+  background-image: url('http://globalisvilag.com/wp-content/uploads/2016/03/2014-bicycle-city.jpg');
+  background-size: cover;
+  color: #000;
+  height: 160px;
+  text-shadow: 0.25px 0.25px 0.25px #000;
+  text-align: center;
 
-
-
-
+ }
+ 
+.navbar-inverse .navbar-text, .navbar-inverse .navbar-nav>li>a{
+	 color: #fff;
+}
+.navbar {
+margin-bottom:0px;
+}
 
 
