@@ -2,17 +2,22 @@ var express = require('express'),
     exphbs  = require('express3-handlebars'),
     passport = require('passport'),
     LocalStrategy = require('passport-local'),
-    FacebookStrategy = require('passport-facebook');
-    
+    FacebookStrategy = require('passport-facebook').Strategy;
+
 
 var config = require('./config.json'), //config file contains all tokens and other private info
     funct = require('./functions.js');
 
 var app = express();
 
+// Facebook authentication
+var fbAuth = require('./authentication/fbAuth.js');
+
 
  app.use(express.static(__dirname + '/styles'));
  app.use(express.static(__dirname + '/maps'));
+
+
 //===============PASSPORT=================
 
 // Passport session setup.
@@ -68,6 +73,20 @@ passport.use('local-signup', new LocalStrategy(
     })
     .fail(function (err){
       console.log(err.body);
+    });
+  }
+));
+
+
+// Use Facebook to login
+passport.use(new FacebookStrategy({
+    clientID: fbAuth.clientID,
+    clientSecret: fbAuth.clientID,
+    callbackURL: fbAuth.callbackURL
+  },
+  function(accessToken, refreshToken, profile, cb) {
+    User.findOrCreate({ facebookId: profile.id }, function (err, user) {
+      return cb(err, user);
     });
   }
 ));
@@ -150,7 +169,7 @@ app.post('/local-reg', passport.authenticate('local-signup', {
 );
 
 //sends the request through our local login/signin strategy, and if successful takes user to homepage, otherwise returns then to signin page
-app.post('/login', passport.authenticate('local-signin', { 
+app.post('/login', passport.authenticate('local-signin', {
   successRedirect: '/',
   failureRedirect: '/signin'
   })
