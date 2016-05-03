@@ -33,7 +33,7 @@ passport.deserializeUser(function(obj, done) {
 
 // Use Facebook to login
 passport.use(new FacebookStrategy({
-    clientID: fbAuth.clientID,
+    clientID: '1623536321303169',
     clientSecret: fbAuth.clientSecret,
     callbackURL: fbAuth.callbackURL
   },
