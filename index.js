@@ -99,6 +99,20 @@ function ensureAuthenticated(req, res, next) {
 }
 
 
+function event(req, res, next) {
+      if (event) {
+        console.log("Create an event " + user.event);
+        req.session.success = 'The event where successfully created ' + user.username + '!';
+        done(null, user);
+      }
+      if (!event) {
+        console.log("Could not creata an event");
+        req.session.error = 'Could not creata an event. Please try again.';
+        done(null, event); 
+    }
+  }
+
+
 //===============EXPRESS=================
 
 // Configure Express
@@ -175,6 +189,46 @@ app.post('/login', passport.authenticate('local-signin', {
   })
 );
 
+
+app.get('/event', function(req, res){
+  res.render('event', {user: req.user});
+});
+
+
+app.post('/p/:id', function(req, res) {
+  var id = req.param("id")
+  , post = {
+    text: req.param("answer")
+  }
+
+  db.newEventBuilder()
+    .from('event', id)
+    .type('post')
+    .data(post)
+    .then(function (results){
+      res.redirect("/p/" + id);
+    });
+});
+
+app.post('/event-post', function (req, res){
+  var title = req.param("title")
+  , subject = req.param("subject")
+  , date = moment().format('MMMM Do YYYY, h:mm:ss a')
+
+  db.post('event', {
+    "sub-title" : title,
+    "sub-dis" : subject,
+    "date" : date
+  })
+  .then(function (result) {
+    var responseKey = result.headers.location.split("/")[3];
+    res.redirect('/p/' + responseKey);
+  })
+  .fail(function (err) {
+
+  });
+});
+
 //logs user out of site, deleting them from the session, and returns to homepage
 app.get('/logout', function(req, res){
   var name = req.user.username;
@@ -183,6 +237,8 @@ app.get('/logout', function(req, res){
   res.redirect('/');
   req.session.notice = "You have successfully been logged out " + name + "!";
 });
+
+
 
 
 //===============PORT=================
