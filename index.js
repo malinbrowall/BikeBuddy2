@@ -31,6 +31,18 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
+
+// Use Facebook to login
+passport.use(new FacebookStrategy({
+    clientID: fbAuth.clientID,
+    clientSecret: fbAuth.clientSecret,
+    callbackURL: fbAuth.callbackURL
+  },
+  function(accessToken, refreshToken, profile, cb) {
+    console.log("logged in with fb :)");
+  }
+));
+
 // Use the LocalStrategy within Passport to login users.
 passport.use('local-signin', new LocalStrategy(
   {passReqToCallback : true}, //allows us to pass back the request to the callback
@@ -53,6 +65,7 @@ passport.use('local-signin', new LocalStrategy(
     });
   }
 ));
+
 
 // Use the LocalStrategy within Passport to Register/"signup" users.
 passport.use('local-signup', new LocalStrategy(
@@ -78,19 +91,6 @@ passport.use('local-signup', new LocalStrategy(
 ));
 
 
-// Use Facebook to login
-passport.use(new FacebookStrategy({
-    clientID: fbAuth.clientID,
-    clientSecret: fbAuth.clientID,
-    callbackURL: fbAuth.callbackURL
-  },
-  function(accessToken, refreshToken, profile, cb) {
-    User.findOrCreate({ facebookId: profile.id }, function (err, user) {
-      return cb(err, user);
-    });
-  }
-));
-
 // Simple route middleware to ensure user is authenticated.
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
@@ -108,7 +108,7 @@ function event(req, res, next) {
       if (!event) {
         console.log("Could not creata an event");
         req.session.error = 'Could not creata an event. Please try again.';
-        done(null, event); 
+        done(null, event);
     }
   }
 
@@ -228,6 +228,15 @@ app.post('/event-post', function (req, res){
 
   });
 });
+
+app.get('/auth/facebook', passport.authenticate('facebook'));
+
+app.get('/auth/facebook/callback', passport.authenticate('facebook', {
+  failureRedirect: '/signin' }), function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
+
 
 //logs user out of site, deleting them from the session, and returns to homepage
 app.get('/logout', function(req, res){
