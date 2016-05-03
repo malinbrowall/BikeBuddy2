@@ -4,7 +4,7 @@
 {{#if user}}  
 
   <div class="jumbotron">
-    <h1>Bikebuddy</h1>
+    <h1>Add Event</h1>
 </div>
   <script src="script.js"></script>
 
@@ -35,15 +35,15 @@
 
 <!--Om användaren inte är inloggad visas denna-->
 {{else}}
-  <div class="jumbotron">
-    <h1>Bikebuddy</h1>
-  </div>
-   <p>If you want to create a new event, you have to sign in!</p>
-    <p>
-      <a href="/signin" class="btn btn-primary btn-lg" role="button">
-        <span class="glyphicon glyphicon-user"></span> 
-        Sign in!
-      </a>
-    </p>
+    <div class="jumbotron">
+  <h1>Sign in</h1>
+  <p>Welcome to Bikebuddy</p>
+  <p>If you want to create a new event, you have to sign in!</p>
+  <p>
+</div>
+<div class="col-md-offset-4">  
+    <a href="/auth/facebook/" class="btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-user"></span> Sign in with Facebook</a>
+  </p>
+</div>
 
 {{/if}}

@@ -3,23 +3,16 @@ body{
 }
 
 #map-canvas{
-	height: 50%;
-	max-width:100%;
-	min-width: 70%;
-	width: 90%;
-	position: absolute;
-	margin: 0px auto;
-
+  height: 500px;
+  
 
 }
-/*#pip-pano{
-	right: 30px;
-	width: 25%;
-	height: 50%;
-	position: absolute;
-	z-index: 1;
+
+#time{
+padding: 1%;
+background-color: #DEDEDE;
+
 }
-*/
 
 h1{
 text-align: center;
@@ -33,19 +26,22 @@ text-align: center;
 .jumbotron {
   background-image: url('http://globalisvilag.com/wp-content/uploads/2016/03/2014-bicycle-city.jpg');
   background-size: cover;
-  color: #000;
-  height: 160px;
   text-shadow: 0.25px 0.25px 0.25px #000;
   text-align: center;
+  background-color: #FFF;
   padding-top: 1%;
+
+
 
  }
 /*navigation*/
 .navbar-inverse .navbar-text, .navbar-inverse .navbar-nav>li>a{
 	 color: #fff;
+
 }
 .navbar {
 margin-bottom:0px;
+
 }
 
 /*formulär*/
@@ -54,11 +50,9 @@ margin-bottom:0px;
 }
 
 .footer {
-	background-color: #FFF;
-	padding: 1%;
+
+	padding-top: 1%;
 
 }
-.footer {
-	background-color: #FFF;
-	padding-top: 1%;
-}
+
+

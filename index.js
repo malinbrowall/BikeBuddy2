@@ -14,6 +14,8 @@ var app = express();
 // Facebook authentication
  app.use(express.static(__dirname + '/styles'));
  app.use(express.static(__dirname + '/maps'));
+ app.use(express.static(__dirname + '/images'));
+
 
 
 
@@ -197,11 +199,6 @@ app.post('/login', passport.authenticate('local-signin', {
   failureRedirect: '/signin'
   })
 );
-
-
-app.get('/event', function(req, res){
-  res.render('event', {user: req.user});
-});
 
 
 app.post('/p/:id', function(req, res) {
