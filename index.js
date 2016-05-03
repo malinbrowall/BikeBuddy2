@@ -161,6 +161,9 @@ app.get('/', function(req, res){
 app.get('/maps', function(req, res){
    res.render('maps', {user: req.user});
 });
+app.get('/newevent', function(req, res){
+   res.render('newevent', {user: req.user});
+});
 
 //displays our signup page
 app.get('/signin', function(req, res){
