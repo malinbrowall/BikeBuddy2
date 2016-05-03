@@ -7,14 +7,14 @@ var express = require('express'),
 
 var config = require('./config.json'), //config file contains all tokens and other private info
     funct = require('./functions.js');
+    fbAuth = require('./fbAuth.json');
 
 var app = express();
 
 // Facebook authentication
-var fbAuth = require('./authentication/fbAuth.js');
-
  app.use(express.static(__dirname + '/styles'));
  app.use(express.static(__dirname + '/maps'));
+
 
 
 //===============PASSPORT=================
@@ -33,7 +33,7 @@ passport.deserializeUser(function(obj, done) {
 
 // Use Facebook to login
 passport.use(new FacebookStrategy({
-    clientID: '1623536321303169',
+    clientID: fbAuth.clientID,
     clientSecret: fbAuth.clientSecret,
     callbackURL: fbAuth.callbackURL
   },
