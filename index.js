@@ -13,7 +13,6 @@ var app = express();
 // Facebook authentication
 var fbAuth = require('./authentication/fbAuth.js');
 
-
  app.use(express.static(__dirname + '/styles'));
  app.use(express.static(__dirname + '/maps'));
 
@@ -39,7 +38,9 @@ passport.use(new FacebookStrategy({
     callbackURL: fbAuth.callbackURL
   },
   function(accessToken, refreshToken, profile, cb) {
-    console.log("logged in with fb :)");
+    process.nextTick(function() {
+      console.log("Now logged with facebook");
+    })
   }
 ));
 
