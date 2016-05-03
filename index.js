@@ -2,17 +2,21 @@ var express = require('express'),
     exphbs  = require('express3-handlebars'),
     passport = require('passport'),
     LocalStrategy = require('passport-local'),
-    FacebookStrategy = require('passport-facebook');
-    
+    FacebookStrategy = require('passport-facebook').Strategy;
+
 
 var config = require('./config.json'), //config file contains all tokens and other private info
     funct = require('./functions.js');
 
 var app = express();
 
+// Facebook authentication
+var fbAuth = require('./authentication/fbAuth.js');
 
  app.use(express.static(__dirname + '/styles'));
  app.use(express.static(__dirname + '/maps'));
+
+
 //===============PASSPORT=================
 
 // Passport session setup.
@@ -25,6 +29,20 @@ passport.deserializeUser(function(obj, done) {
   console.log("deserializing " + obj);
   done(null, obj);
 });
+
+
+// Use Facebook to login
+passport.use(new FacebookStrategy({
+    clientID: '1623536321303169',
+    clientSecret: fbAuth.clientSecret,
+    callbackURL: fbAuth.callbackURL
+  },
+  function(accessToken, refreshToken, profile, cb) {
+    process.nextTick(function() {
+      console.log("Now logged with facebook");
+    })
+  }
+));
 
 // Use the LocalStrategy within Passport to login users.
 passport.use('local-signin', new LocalStrategy(
@@ -49,6 +67,7 @@ passport.use('local-signin', new LocalStrategy(
   }
 ));
 
+
 // Use the LocalStrategy within Passport to Register/"signup" users.
 passport.use('local-signup', new LocalStrategy(
   {passReqToCallback : true}, //allows us to pass back the request to the callback
@@ -72,6 +91,7 @@ passport.use('local-signup', new LocalStrategy(
   }
 ));
 
+
 // Simple route middleware to ensure user is authenticated.
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
@@ -89,7 +109,7 @@ function event(req, res, next) {
       if (!event) {
         console.log("Could not creata an event");
         req.session.error = 'Could not creata an event. Please try again.';
-        done(null, event); 
+        done(null, event);
     }
   }
 
@@ -167,7 +187,7 @@ app.post('/local-reg', passport.authenticate('local-signup', {
 );
 
 //sends the request through our local login/signin strategy, and if successful takes user to homepage, otherwise returns then to signin page
-app.post('/login', passport.authenticate('local-signin', { 
+app.post('/login', passport.authenticate('local-signin', {
   successRedirect: '/',
   failureRedirect: '/signin'
   })
@@ -212,6 +232,15 @@ app.post('/event-post', function (req, res){
 
   });
 });
+
+app.get('/auth/facebook', passport.authenticate('facebook'));
+
+app.get('/auth/facebook/callback', passport.authenticate('facebook', {
+  failureRedirect: '/signin' }), function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
+
 
 //logs user out of site, deleting them from the session, and returns to homepage
 app.get('/logout', function(req, res){
