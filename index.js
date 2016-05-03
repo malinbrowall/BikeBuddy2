@@ -38,7 +38,7 @@ passport.use(new FacebookStrategy({
     callbackURL: fbAuth.callbackURL
   },
   function(accessToken, refreshToken, profile, cb) {
-    process.nextTick(function() {
+    process.nextTick(function(req, res) {
       console.log("Now logged with facebook");
     })
   }
@@ -233,14 +233,12 @@ app.post('/event-post', function (req, res){
   });
 });
 
-app.get('/auth/facebook', passport.authenticate('facebook'));
 
-app.get('/auth/facebook/callback', passport.authenticate('facebook', {
-  failureRedirect: '/signin' }), function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/');
-  });
 
+app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', 'user_location'] }));
+app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }), function(req, res) {
+  res.redirect(req.session.returnTo || '/');
+});
 
 //logs user out of site, deleting them from the session, and returns to homepage
 app.get('/logout', function(req, res){
