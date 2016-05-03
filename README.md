@@ -1,4 +1,3 @@
-userAuth
-========
+Welcome to BikeBuddy!
 
-Welcome to bikebuddy
+:)
