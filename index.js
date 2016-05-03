@@ -2,17 +2,21 @@ var express = require('express'),
     exphbs  = require('express3-handlebars'),
     passport = require('passport'),
     LocalStrategy = require('passport-local'),
-    FacebookStrategy = require('passport-facebook');
-    
+    FacebookStrategy = require('passport-facebook').Strategy;
+
 
 var config = require('./config.json'), //config file contains all tokens and other private info
     funct = require('./functions.js');
+    fbAuth = require('./fbAuth.json');
 
 var app = express();
 
-
+// Facebook authentication
  app.use(express.static(__dirname + '/styles'));
  app.use(express.static(__dirname + '/maps'));
+
+
+
 //===============PASSPORT=================
 
 // Passport session setup.
@@ -25,6 +29,20 @@ passport.deserializeUser(function(obj, done) {
   console.log("deserializing " + obj);
   done(null, obj);
 });
+
+
+// Use Facebook to login
+passport.use(new FacebookStrategy({
+    clientID: fbAuth.clientID,
+    clientSecret: fbAuth.clientSecret,
+    callbackURL: fbAuth.callbackURL
+  },
+  function(accessToken, refreshToken, profile, cb) {
+    process.nextTick(function() {
+      console.log("Now logged with facebook");
+    })
+  }
+));
 
 // Use the LocalStrategy within Passport to login users.
 passport.use('local-signin', new LocalStrategy(
@@ -49,6 +67,7 @@ passport.use('local-signin', new LocalStrategy(
   }
 ));
 
+
 // Use the LocalStrategy within Passport to Register/"signup" users.
 passport.use('local-signup', new LocalStrategy(
   {passReqToCallback : true}, //allows us to pass back the request to the callback
@@ -72,12 +91,27 @@ passport.use('local-signup', new LocalStrategy(
   }
 ));
 
+
 // Simple route middleware to ensure user is authenticated.
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
   req.session.error = 'Please sign in!';
   res.redirect('/signin');
 }
+
+
+function event(req, res, next) {
+      if (event) {
+        console.log("Create an event " + user.event);
+        req.session.success = 'The event where successfully created ' + user.username + '!';
+        done(null, user);
+      }
+      if (!event) {
+        console.log("Could not creata an event");
+        req.session.error = 'Could not creata an event. Please try again.';
+        done(null, event);
+    }
+  }
 
 
 //===============EXPRESS=================
@@ -128,6 +162,9 @@ app.get('/', function(req, res){
 app.get('/maps', function(req, res){
    res.render('maps', {user: req.user});
 });
+app.get('/newevent', function(req, res){
+   res.render('newevent', {user: req.user});
+});
 
 //displays our signup page
 app.get('/signin', function(req, res){
@@ -150,11 +187,60 @@ app.post('/local-reg', passport.authenticate('local-signup', {
 );
 
 //sends the request through our local login/signin strategy, and if successful takes user to homepage, otherwise returns then to signin page
-app.post('/login', passport.authenticate('local-signin', { 
+app.post('/login', passport.authenticate('local-signin', {
   successRedirect: '/',
   failureRedirect: '/signin'
   })
 );
+
+
+app.get('/event', function(req, res){
+  res.render('event', {user: req.user});
+});
+
+
+app.post('/p/:id', function(req, res) {
+  var id = req.param("id")
+  , post = {
+    text: req.param("answer")
+  }
+
+  db.newEventBuilder()
+    .from('event', id)
+    .type('post')
+    .data(post)
+    .then(function (results){
+      res.redirect("/p/" + id);
+    });
+});
+
+app.post('/event-post', function (req, res){
+  var title = req.param("title")
+  , subject = req.param("subject")
+  , date = moment().format('MMMM Do YYYY, h:mm:ss a')
+
+  db.post('event', {
+    "sub-title" : title,
+    "sub-dis" : subject,
+    "date" : date
+  })
+  .then(function (result) {
+    var responseKey = result.headers.location.split("/")[3];
+    res.redirect('/p/' + responseKey);
+  })
+  .fail(function (err) {
+
+  });
+});
+
+app.get('/auth/facebook', passport.authenticate('facebook'));
+
+app.get('/auth/facebook/callback', passport.authenticate('facebook', {
+  failureRedirect: '/signin' }), function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
+
 
 //logs user out of site, deleting them from the session, and returns to homepage
 app.get('/logout', function(req, res){
@@ -164,6 +250,8 @@ app.get('/logout', function(req, res){
   res.redirect('/');
   req.session.notice = "You have successfully been logged out " + name + "!";
 });
+
+
 
 
 //===============PORT=================

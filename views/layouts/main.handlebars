@@ -20,53 +20,55 @@
 
     <div class="container">
 
-		<nav class="navbar navbar-inverse" role="navigation">
-		<div class="container-fluid">
+  		<nav class="navbar navbar-inverse" role="navigation">
+  		<div class="container-fluid">
 
-      <!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-	
-      <a class="navbar-brand" href="/">BikeBuddy</a>
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-			  <span class="sr-only">Toggle navigation</span>
-			  <span class="icon-bar"></span>
-			  <span class="icon-bar"></span>
-			  <span class="icon-bar"></span>
-			</button>
-		</div>
+        <!-- Brand and toggle get grouped for better mobile display -->
+  		<div class="navbar-header">
+  	
+        <a class="navbar-brand" href="/">BikeBuddy</a>
+  			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+  			  <span class="sr-only">Toggle navigation</span>
+  			  <span class="icon-bar"></span>
+  			  <span class="icon-bar"></span>
+  			  <span class="icon-bar"></span>
+  			</button>
+  		</div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
-            <li>
-            
-		
-		
-        <li><a href="/">Home</a></li>
-        <li><a href="/newevent">New Event</a></li>
-        <li><a href="/maps">Map</a></li>
-        <li><a href="/info">Info</a></li>
-                </p>
-                </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                  <li>
-				    {{#if user}}
-					<p class="navbar-text">
-					<strong>Hi,</strong> 
-					{{user.username}}
-					<li>
-                    <a href="/logout">Log Out</a>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li>
+              
+  		
+  		
+          <li><a href="/">Home</a></li>
+          <li><a href="/newevent">Add Event</a></li>
+          <li><a href="/maps">Map</a></li>
+          <li><a href="/info">Info</a></li>
+             <li><a href="/event">Event</a></li>
+                  </p>
                   </li>
-              {{else}}
-                <a href="/signin">Sign In</a>
-                </li>
-              {{/if}}
-          </ul>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
-    </nav>
-
+                  </ul>
+                  <ul class="nav navbar-nav navbar-right">
+                    <li>
+  				    {{#if user}}
+  					<p class="navbar-text">
+  					<strong>Hi,</strong> 
+  					{{user.username}}
+  					<li>
+                      <a href="/logout">Log Out</a>
+                    </li>
+                {{else}}
+                  <a href="/signin">Sign In</a>
+                  </li>
+                {{/if}}
+            </ul>
+          </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>      
+  <div class="wrapper">
+  </div><!-- /.wrapper -->
 
 
       
