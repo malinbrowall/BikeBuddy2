@@ -37,10 +37,15 @@ passport.use(new FacebookStrategy({
     clientSecret: fbAuth.clientSecret,
     callbackURL: fbAuth.callbackURL
   },
-  function(accessToken, refreshToken, profile, cb) {
-    process.nextTick(function(req, res) {
-      console.log("Now logged with facebook");
-    })
+  function(accessToken, refreshToken, profile, done) {
+     process.nextTick(function () {
+      //Check whether the User exists or not using profile.id
+      if(config.use_database==='true')
+      {
+         //Further code of Database.
+      }
+      return done(null, profile);
+    });
   }
 ));
 
@@ -233,12 +238,16 @@ app.post('/event-post', function (req, res){
   });
 });
 
+app.get('/auth/facebook', passport.authenticate('facebook'));
+app.get('/auth/facebook/callback',
+  passport.authenticate('facebook', { 
+       successRedirect : '/', 
+       failureRedirect: '/login' 
+  }),
+  function(req, res) {
+    res.redirect('/');
+  });
 
-
-app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', 'user_location'] }));
-app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }), function(req, res) {
-  res.redirect(req.session.returnTo || '/');
-});
 
 //logs user out of site, deleting them from the session, and returns to homepage
 app.get('/logout', function(req, res){
