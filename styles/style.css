@@ -48,6 +48,7 @@ text-align: center;
 margin-bottom:0px;
 }
 
+<<<<<<< HEAD
 /*formulär*/
 .form-group{
 	
@@ -58,3 +59,10 @@ margin-bottom:0px;
 	padding: 1%;
 
 }
+=======
+.footer {
+	background-color: #FFF;
+	padding-top: 1%;
+}
+
+>>>>>>> malleB
