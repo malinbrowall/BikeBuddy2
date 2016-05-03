@@ -1,0 +1,49 @@
+<!-- views/home.handlebars -->
+
+<!--Om användaren är inloggad visas koden nedan-->
+{{#if user}}  
+
+  <div class="jumbotron">
+    <h1>Bikebuddy</h1>
+</div>
+  <script src="script.js"></script>
+
+
+<!--formulär-->
+<div class="form-group" >
+	<div class="col-sm-3"> 
+		<input type="text" class="form-control" id="title"  placeholder="Event name">
+		<input type="text" class="form-control" name="date" id="date" placeholder= "Choose Date">
+	</div>
+	<div class="col-sm-2">
+		<input type="text" class="form-control" id="start"  placeholder="Start">
+		<input type="text" class="form-control" id="end" placeholder="End">
+	</div>
+	<div class="col-sm-8">
+		<input type="text" class="form-control" id="describ" placeholder="Description">
+    </div>
+	  <!--när denna submit knapp trycks så kommer det att sparas i databas -->
+	<div class="form-group">        
+		<div class="col-sm-offset-2 col-sm-6">
+		
+			<input type="submit" class="btn btn-primary btn-sm" value="Submit"/>
+		</div>
+    </div>
+	
+</div>
+
+
+<!--Om användaren inte är inloggad visas denna-->
+{{else}}
+  <div class="jumbotron">
+    <h1>Bikebuddy</h1>
+  </div>
+   <p>If you want to create a new event, you have to sign in!</p>
+    <p>
+      <a href="/signin" class="btn btn-primary btn-lg" role="button">
+        <span class="glyphicon glyphicon-user"></span> 
+        Sign in!
+      </a>
+    </p>
+
+{{/if}}
