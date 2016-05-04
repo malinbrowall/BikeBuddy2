@@ -12,12 +12,11 @@ exports.fbLogin = function(id, name) {
 
   db.get('fb-users', name)
   .then(function (result) {
-    console.log('i like bananas');
     deferred.resolve(false);
   })
   .fail(function (result) {
     console.log(result.body);
-    console.log('I really love apples');
+    console.log('Saving new user in DB');
     db.put('fb-users', name, user)
     .then(function() {
       console.log("NAME" + user);
