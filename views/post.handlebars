@@ -1,0 +1,49 @@
+<!-- views/home.handlebars -->
+
+<!--Om användaren är inloggad visas koden nedan-->
+{{#if user}}
+
+  <div class="jumbotron">
+    <h1>Add Event</h1>
+</div>
+  <script src="script.js"></script>
+
+
+<!--formulär-->
+<div class="row">
+  <form method="POST" action="/topic" class="small-12 columns medium-6">
+    <div class="row">
+      <div class="small-12 columns">
+        <label>Subject</label>
+        <input type="text" placeholder="Title of convo" name="title"/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="small-12 columns">
+        <label>Subject Matter</label>
+        <textarea placeholder="What do you want to talk about?" name="subject" class="commentBox"></textarea>
+      </div>
+    </div>
+    <div class="row">
+      <div class="small-12 medium-4 columns small-centered">
+        <input type="submit" value="Create New Topic" class="button postfix"/>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+<!--Om användaren inte är inloggad visas denna-->
+{{else}}
+    <div class="jumbotron">
+  <h1>Sign in</h1>
+  <p>Welcome to Bikebuddy</p>
+  <p>If you want to create a new event, you have to sign in!</p>
+  <p>
+</div>
+<div class="col-md-offset-4">
+    <a href="/auth/facebook/" class="btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-user"></span> Sign in with Facebook</a>
+  </p>
+</div>
+
+{{/if}}
