@@ -13,6 +13,9 @@ var config = require('./config.json'), //config file contains all tokens and oth
 
 var app = express();
 
+//DB variables
+var db = require('orchestrate')(config.db);
+
 // Facebook authentication
  app.use(express.static(__dirname + '/styles'));
  app.use(express.static(__dirname + '/maps'));
@@ -42,15 +45,20 @@ passport.use(new FacebookStrategy({
     callbackURL: fbAuth.callbackURL
   },
   function(accessToken, refreshToken, profile, done) {
-     process.nextTick(function () {
-      //Check whether the User exists or not using profile.id
-      if(config.use_database==='true')
-      {
-         //Further code of Database.
-      }
-      return done(null, profile);
+     process.nextTick(function(id, name) {
+        //Check whether the User exists or not using profile.id
+        var user = profile;
+
+        funct.fbLogin(id, user)
+        .then(function(user){
+          if (user) {
+            console.log("logged in as " + user);
+          }
+        })
     });
+    return done(null, profile);
   }
+
 ));
 
 // Use the LocalStrategy within Passport to login users.
@@ -276,9 +284,9 @@ app.get('/p/:id', function(req, res) {
 
 app.get('/auth/facebook', passport.authenticate('facebook'));
 app.get('/auth/facebook/callback',
-  passport.authenticate('facebook', { 
-       successRedirect : '/', 
-       failureRedirect: '/login' 
+  passport.authenticate('facebook', {
+       successRedirect : '/',
+       failureRedirect: '/login'
   }),
   function(req, res) {
     res.redirect('/');

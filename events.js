@@ -1,11 +1,9 @@
 
-    var config = require('./config.json'), //config file contains all tokens and other private info
-    db = require('orchestrate')(config.db); //config.db holds Orchestrate token
+var config = require('./config.json'), //config file contains all tokens and other private info
+db = require('orchestrate')(config.db); //config.db holds Orchestrate token
 
 
 exports.getEvent = function(req, res) {
-
-  
 
   db.newSearchBuilder()
     .collection('Event')
