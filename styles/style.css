@@ -1,5 +1,5 @@
 body{
-
+  background-color: #FCFCFC;
 }
 
 #map-canvas{
@@ -28,6 +28,7 @@ text-align: center;
   text-align: center;
   background-color: #FFF;
   padding-top: 1%;
+  border-radius: 0px !important;
 
 
 
@@ -39,6 +40,7 @@ text-align: center;
 }
 .navbar {
 margin-bottom:0px;
+border-radius: 0px !important;
 
 }
 
@@ -49,8 +51,9 @@ margin-bottom:0px;
 
 .footer {
   background-color: #FFF;
-	padding-top: 1%;
+	padding-top: 0.5%;
 
 }
+
 
 

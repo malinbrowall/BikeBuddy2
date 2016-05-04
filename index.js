@@ -2,14 +2,19 @@ var express = require('express'),
     exphbs  = require('express3-handlebars'),
     passport = require('passport'),
     LocalStrategy = require('passport-local'),
+    moment = require('moment'),
     FacebookStrategy = require('passport-facebook').Strategy;
 
 
 var config = require('./config.json'), //config file contains all tokens and other private info
     funct = require('./functions.js');
     fbAuth = require('./fbAuth.json');
+    db = require('orchestrate')(config.db);
 
 var app = express();
+
+//DB variables
+var db = require('orchestrate')(config.db);
 
 // Facebook authentication
  app.use(express.static(__dirname + '/styles'));
@@ -40,15 +45,20 @@ passport.use(new FacebookStrategy({
     callbackURL: fbAuth.callbackURL
   },
   function(accessToken, refreshToken, profile, done) {
-     process.nextTick(function () {
-      //Check whether the User exists or not using profile.id
-      if(config.use_database==='true')
-      {
-         //Further code of Database.
-      }
-      return done(null, profile);
+     process.nextTick(function(id, name) {
+        //Check whether the User exists or not using profile.id
+        var user = profile;
+
+        funct.fbLogin(id, user)
+        .then(function(user){
+          if (user) {
+            console.log("logged in as " + user);
+          }
+        })
     });
+    return done(null, profile);
   }
+
 ));
 
 // Use the LocalStrategy within Passport to login users.
@@ -162,9 +172,7 @@ app.set('view engine', 'handlebars');
 
 //===============ROUTES=================
 //displays our homepage
-app.get('/', function(req, res){
-  res.render('home', {user: req.user});
-});
+
 
 app.get('/maps', function(req, res){
    res.render('maps', {user: req.user});
@@ -208,7 +216,7 @@ app.post('/p/:id', function(req, res) {
   }
 
   db.newEventBuilder()
-    .from('event', id)
+    .from('Event', id)
     .type('post')
     .data(post)
     .then(function (results){
@@ -235,11 +243,50 @@ app.post('/event-post', function (req, res){
   });
 });
 
+
+app.get('/', function(req, res) {
+
+  var offset = req.param("page") ? (req.param("page") - 1) * 10 : 0;
+
+  db.newSearchBuilder()
+    .collection('Event')
+    .limit(10)
+    .offset(offset)
+    .query('*')
+    .then(function (topics){
+      res.render('home', { user: req.user, title: 'Express', topics: topics.body.results, totalCount: topics.body.total_count});
+    });
+
+
+});
+
+
+app.get('/p/:id', function(req, res) {
+  db.get('Event', req.param("id"))
+  .then(function (results){
+    db.newEventReader()
+    .from('Event', req.param("id"))
+    .type('post')
+    .then(function (events){
+
+      events.body.results.forEach(function (obj, index){
+          events.body.results[index].date = moment.unix(obj.timestamp / 1000).format('MMMM Do YYYY, h:mm:ss a');
+      });
+
+      res.render('newevent', {
+        title: results.body["sub-title"],
+        content: results.body["sub-dis"],
+        responses: events.body.results
+      });
+    });
+  });
+});
+
 app.get('/auth/facebook', passport.authenticate('facebook'));
 app.get('/auth/facebook/callback',
-  passport.authenticate('facebook', { 
-       successRedirect : '/', 
-       failureRedirect: '/login' 
+  passport.authenticate('facebook', {
+       successRedirect : '/',
+       failureRedirect: '/login'
   }),
   function(req, res) {
     res.redirect('/');
