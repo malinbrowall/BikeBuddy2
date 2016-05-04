@@ -1,5 +1,5 @@
 body{
-
+  background-color: #FCFCFC;
 }
 
 #map-canvas{
@@ -9,8 +9,6 @@ body{
 }
 
 #time{
-padding: 1%;
-background-color: #DEDEDE;
 
 }
 
@@ -50,9 +48,10 @@ margin-bottom:0px;
 }
 
 .footer {
-
-	padding-top: 1%;
+  background-color: #FFF;
+	padding-top: 0.5%;
 
 }
+
 
 
