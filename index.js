@@ -47,14 +47,16 @@ passport.use(new FacebookStrategy({
   function(accessToken, refreshToken, profile, done) {
      process.nextTick(function(id, name) {
         //Check whether the User exists or not using profile.id
-        var user = profile;
+
+        var user = profile.displayName;
+        var id = profile.id;
 
         funct.fbLogin(id, user)
-        .then(function(user){
-          if (user) {
+//        .then(function(user){
+//          if (user) {
             console.log("logged in as " + user);
-          }
-        })
+//          }
+//        })
     });
     return done(null, profile);
   }
