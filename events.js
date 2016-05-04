@@ -5,14 +5,14 @@
 
 exports.getEvent = function(req, res) {
 
-  
+
 
   db.newSearchBuilder()
     .collection('Event')
     .limit(10)
     .query('*')
     .then(function (topics){
-      res.render('home', { title: 'Express', topics: topics.body.results, totalCount: topics.body.total_count});
+      res.render('home', { title: 'Express', topics: topics.body.results.toString, totalCount: topics.body.total_count});
     });
 };
 
