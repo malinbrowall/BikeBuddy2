@@ -3,6 +3,29 @@ var bcrypt = require('bcryptjs'),
     config = require('./config.json'), //config file contains all tokens and other private info
     db = require('orchestrate')(config.db); //config.db holds Orchestrate token
 
+exports.fbLogin = function(id, name) {
+  var deferred = Q.defer();
+  var user = {
+    "ID" : id,
+    "Name" : name,
+  }
+
+  db.get('fb-users', name)
+  .then(function (result) {
+    deferred.resolve(false);
+  })
+  .fail(function (result) {
+    console.log(result.body);
+    console.log('Saving new user in DB');
+    db.put('fb-users', name, user)
+    .then(function() {
+      console.log("NAME" + user);
+      deferred.resolve(user);
+    })
+  });
+  return deferred.promise;
+}
+
 //used in local-signup strategy
 exports.localReg = function (username, password) {
   var deferred = Q.defer();
@@ -69,5 +92,3 @@ exports.localAuth = function (username, password) {
 
   return deferred.promise;
 }
-
-
