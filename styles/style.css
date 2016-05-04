@@ -1,5 +1,5 @@
 body{
-
+  background-color: #FCFCFC;
 }
 
 #map-canvas{
@@ -49,8 +49,9 @@ margin-bottom:0px;
 
 .footer {
   background-color: #FFF;
-	padding-top: 1%;
+	padding-top: 0.5%;
 
 }
+
 
 
