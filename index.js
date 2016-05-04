@@ -14,6 +14,8 @@ var app = express();
 // Facebook authentication
  app.use(express.static(__dirname + '/styles'));
  app.use(express.static(__dirname + '/maps'));
+ app.use(express.static(__dirname + '/images'));
+
 
 
 
@@ -37,10 +39,15 @@ passport.use(new FacebookStrategy({
     clientSecret: fbAuth.clientSecret,
     callbackURL: fbAuth.callbackURL
   },
-  function(accessToken, refreshToken, profile, cb) {
-    process.nextTick(function() {
-      console.log("Now logged with facebook");
-    })
+  function(accessToken, refreshToken, profile, done) {
+     process.nextTick(function () {
+      //Check whether the User exists or not using profile.id
+      if(config.use_database==='true')
+      {
+         //Further code of Database.
+      }
+      return done(null, profile);
+    });
   }
 ));
 
@@ -194,11 +201,6 @@ app.post('/login', passport.authenticate('local-signin', {
 );
 
 
-app.get('/event', function(req, res){
-  res.render('event', {user: req.user});
-});
-
-
 app.post('/p/:id', function(req, res) {
   var id = req.param("id")
   , post = {
@@ -234,10 +236,12 @@ app.post('/event-post', function (req, res){
 });
 
 app.get('/auth/facebook', passport.authenticate('facebook'));
-
-app.get('/auth/facebook/callback', passport.authenticate('facebook', {
-  failureRedirect: '/signin' }), function(req, res) {
-    // Successful authentication, redirect home.
+app.get('/auth/facebook/callback',
+  passport.authenticate('facebook', { 
+       successRedirect : '/', 
+       failureRedirect: '/login' 
+  }),
+  function(req, res) {
     res.redirect('/');
   });
 

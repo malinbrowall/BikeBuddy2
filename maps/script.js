@@ -4,13 +4,6 @@
 
 
 
-   $mapster.mapster('setPano', '#pip-pano', {
-    position: {
-      lat: 55.606641,
-      lng: 13.000076,
-    },
-   });
-
     $mapster.mapster('addMarker', {
         location: 'Limhamnsvägen, Brygga 1, Malmo',
         event:{
