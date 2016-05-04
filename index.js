@@ -212,16 +212,10 @@ app.post('/login', passport.authenticate('local-signin', {
 );
 
 app.get('/', function(req, res) {
-
   var offset = req.param("page") ? (req.param("page") - 1) * 10 : 0;
-
-  db.newSearchBuilder()
-    .collection('Event')
-    .limit(10)
-    .offset(offset)
-    .query('*')
-    .then(function (topics){
-      res.render('home', { user: req.user, title: 'Express', topics: topics.body.results, totalCount: topics.body.total_count});
+  db.list('Event', 'Bikebuddy')
+    .then(function (events){
+      res.render('home', { user: req.user, title: JSON.stringify(events.body.results)});
     });
 });
 
