@@ -179,9 +179,6 @@ app.set('view engine', 'handlebars');
 app.get('/maps', function(req, res){
    res.render('maps', {user: req.user});
 });
-app.get('/newevent', function(req, res){
-   res.render('newevent', {user: req.user});
-});
 
 //displays our signup page
 app.get('/signin', function(req, res){
@@ -194,6 +191,10 @@ app.get('/info', function(req, res){
 
 app.get('/contact', function(req, res){
   res.render('contact', {user: req.user});
+});
+
+app.get('/post', function(req, res){
+  res.render('post', {user: req.user});
 });
 
 //sends the request through our local signup strategy, and if successful takes user to homepage, otherwise returns then to signin page
@@ -209,6 +210,41 @@ app.post('/login', passport.authenticate('local-signin', {
   failureRedirect: '/signin'
   })
 );
+
+app.get('/', function(req, res) {
+
+  var offset = req.param("page") ? (req.param("page") - 1) * 10 : 0;
+
+  db.newSearchBuilder()
+    .collection('Event')
+    .limit(10)
+    .offset(offset)
+    .query('*')
+    .then(function (topics){
+      res.render('home', { user: req.user, title: 'Express', topics: topics.body.results, totalCount: topics.body.total_count});
+    });
+});
+
+app.get('/p/:id', function(req, res) {
+  db.get('Event', req.param("id"))
+  .then(function (results){
+    db.newEventReader()
+    .from('forum-project', req.param("id"))
+    .type('post')
+    .then(function (events){
+
+      events.body.results.forEach(function (obj, index){
+          events.body.results[index].date = moment.unix(obj.timestamp / 1000).format('MMMM Do YYYY, h:mm:ss a');
+      });
+
+      res.render('home', {
+        title: results.body["sub-title"],
+        content: results.body["sub-dis"],
+        responses: events.body.results
+      });
+    });
+  });
+});
 
 
 app.post('/p/:id', function(req, res) {
@@ -226,12 +262,13 @@ app.post('/p/:id', function(req, res) {
     });
 });
 
-app.post('/event-post', function (req, res){
+/** POST / create a new topic **/
+app.post('/topic', function (req, res){
   var title = req.param("title")
   , subject = req.param("subject")
   , date = moment().format('MMMM Do YYYY, h:mm:ss a')
 
-  db.post('event', {
+  db.post('Event', {
     "sub-title" : title,
     "sub-dis" : subject,
     "date" : date
