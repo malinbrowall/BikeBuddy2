@@ -13,15 +13,9 @@ var config = require('./config.json'), //config file contains all tokens and oth
 
 var app = express();
 
-//DB variables
-var db = require('orchestrate')(config.db);
-
-// Facebook authentication
  app.use(express.static(__dirname + '/styles'));
  app.use(express.static(__dirname + '/maps'));
  app.use(express.static(__dirname + '/images'));
-
-
 
 
 //===============PASSPORT=================
@@ -46,68 +40,17 @@ passport.use(new FacebookStrategy({
   },
   function(accessToken, refreshToken, profile, done) {
      process.nextTick(function(id, name) {
-        //Check whether the User exists or not using profile.id
 
-        var user = profile.displayName;
+        var name = profile.displayName;
         var id = profile.id;
 
-        funct.fbLogin(id, user)
-//        .then(function(user){
-//          if (user) {
-            console.log("logged in as " + user);
-//          }
-//        })
+        funct.fbLogin(id, name)
+        console.log("Logged in as " + name);
+
     });
     return done(null, profile);
   }
 
-));
-
-// Use the LocalStrategy within Passport to login users.
-passport.use('local-signin', new LocalStrategy(
-  {passReqToCallback : true}, //allows us to pass back the request to the callback
-  function(req, username, password, done) {
-    funct.localAuth(username, password)
-    .then(function (user) {
-      if (user) {
-        console.log("LOGGED IN AS: " + user.username);
-        req.session.success = 'You are successfully logged in ' + user.username + '!';
-        done(null, user);
-      }
-      if (!user) {
-        console.log("COULD NOT LOG IN");
-        req.session.error = 'Could not log user in. Please try again.'; //inform user could not log them in
-        done(null, user);
-      }
-    })
-    .fail(function (err){
-      console.log(err.body);
-    });
-  }
-));
-
-
-// Use the LocalStrategy within Passport to Register/"signup" users.
-passport.use('local-signup', new LocalStrategy(
-  {passReqToCallback : true}, //allows us to pass back the request to the callback
-  function(req, username, password, done) {
-    funct.localReg(username, password)
-    .then(function (user) {
-      if (user) {
-        console.log("REGISTERED: " + user.username);
-        req.session.success = 'You are successfully registered and logged in ' + user.username + '!';
-        done(null, user);
-      }
-      if (!user) {
-        console.log("COULD NOT REGISTER");
-        req.session.error = 'That username is already in use, please try a different one.'; //inform user could not log them in
-        done(null, user);
-      }
-    })
-    .fail(function (err){
-      console.log(err.body);
-    });
-  }
 ));
 
 
@@ -144,6 +87,7 @@ app.use(express.session({ secret: 'supernova' }));
 app.use(passport.initialize());
 app.use(passport.session());
 
+//========================================
 
 // Session-persisted message middleware
 app.use(function(req, res, next){
@@ -173,8 +117,6 @@ app.set('view engine', 'handlebars');
 
 
 //===============ROUTES=================
-//displays our homepage
-
 
 app.get('/maps', function(req, res){
    res.render('maps', {user: req.user});
@@ -321,14 +263,14 @@ app.get('/auth/facebook/callback',
 
 //logs user out of site, deleting them from the session, and returns to homepage
 app.get('/logout', function(req, res){
-  var name = req.user.username;
-  console.log("LOGGIN OUT " + req.user.username)
+  var name = req.user.displayName;
+  console.log("Logged out " + name + " with ID: " + req.user.id);
   req.logout();
   res.redirect('/');
   req.session.notice = "You have successfully been logged out " + name + "!";
 });
 
-
+//====================================
 
 
 //===============PORT=================
