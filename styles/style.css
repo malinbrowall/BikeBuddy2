@@ -2,9 +2,12 @@ body{
   background-color: #FCFCFC;
 }
 
+.container{
+  padding:0px;
+}
+
 #map-canvas{
   height: 500px;
-  
 
 }
 
