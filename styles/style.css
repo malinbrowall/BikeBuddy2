@@ -9,8 +9,6 @@ body{
 }
 
 #time{
-padding: 1%;
-background-color: #DEDEDE;
 
 }
 
@@ -50,7 +48,7 @@ margin-bottom:0px;
 }
 
 .footer {
-
+  background-color: #FFF;
 	padding-top: 1%;
 
 }
