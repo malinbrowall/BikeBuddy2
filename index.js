@@ -158,9 +158,9 @@ app.get('/', function(req, res) {
   var arr = [];
   db.list('Event', 'Bikebuddy')
     .then(function (events){
-      for(i=0; i < 3;){
+      for(i=0; i < 100;){
 
-        var test = events.body.results[i]["value"].date;
+        var test = events.body.results[i]["value"].titles;
         arr.push(test);
         console.log(arr);
         arr.toString();
@@ -169,8 +169,6 @@ app.get('/', function(req, res) {
         res.render('home', {user: req.user, title: arr});
         i++;
       }
-
-
     });
 });
 
@@ -178,7 +176,7 @@ app.get('/p/:id', function(req, res) {
   db.get('Event', req.param("id"))
   .then(function (results){
     db.newEventReader()
-    .from('forum-project', req.param("id"))
+    .from('Event', req.param("id"))
     .type('post')
     .then(function (events){
 
@@ -187,8 +185,8 @@ app.get('/p/:id', function(req, res) {
       });
 
       res.render('home', {
-        title: results.body["sub-title"],
-        content: results.body["sub-dis"],
+        title: results.body["titles"],
+        content: results.body["desc"],
         responses: events.body.results
       });
     });
@@ -218,8 +216,8 @@ app.post('/topic', function (req, res){
   , date = moment().format('MMMM Do YYYY, h:mm:ss a')
 
   db.post('Event', {
-    "sub-title" : title,
-    "sub-dis" : subject,
+    "titles" : title,
+    "desc" : subject,
     "date" : date
   })
   .then(function (result) {
@@ -231,15 +229,6 @@ app.post('/topic', function (req, res){
   });
 });
 
-
-app.get('/', function(req, res) {
-  var offset = req.param("page") ? (req.param("page") - 1) * 10 : 0;
-  db.list('Event', 'Bikebuddy')
-    .then(function(events){
-        res.render('home', { user: req.user, title: JSON.stringify(events.body.results)});
-
-      });
-});
 
 
 app.get('/p/:id', function(req, res) {
@@ -255,8 +244,8 @@ app.get('/p/:id', function(req, res) {
       });
 
       res.render('newevent', {
-        title: results.body["sub-title"],
-        content: results.body["sub-dis"],
+        title: results.body["titles"],
+        content: results.body["desc"],
         responses: events.body.results
       });
     });
