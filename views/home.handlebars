@@ -15,14 +15,17 @@
   </div>
 
 <!--event-->
+{{#for 10}}
 <section class="panel-group" >
-
 	<div class="panel panel-default col-md-7">
-				<h2>Event: {{title}}</h2>
+    <p> EVENTS : {{title}}</p>
+
+    <div id="demo"></div>
 			<p><a href="#" role="button" class="btn btn-default">View details »</a></p>
 	</div><br>
 	<div class="panel panel-default col-md-7">
 </section>
+{{/for}}
 
 {{else}}
 <div class="jumbotron">
