@@ -9,6 +9,7 @@ var express = require('express'),
 var config = require('./config.json'), //config file contains all tokens and other private info
     funct = require('./functions.js');
     fbAuth = require('./fbAuth.json');
+    events = require('./events.js');
     db = require('orchestrate')(config.db);
 
 var app = express();
@@ -153,28 +154,7 @@ app.post('/login', passport.authenticate('local-signin', {
   })
 );
 
-app.get('/', function(req, res) {
-  //var offset = req.param("page") ? (req.param("page") - 1) * 10 : 0;
-  var arr = [];
-  db.list('Event', 'Bikebuddy')
-    .then(function (events){
-      for(i=0; i < 100; i++){
-
-        var title = events.body.results[i]["value"].titles;
-        var desc = events.body.results[i]["value"].desc;
-        var date = events.body.results[i]["value"].date;
-
-        var result = title + '\n' + desc + '\n' + date;
-
-        arr.push(result);
-        arr.toString();
-
-        //$('#demo').append('<p>' + test + '</p>');
-        //res.render('home', { user: req.user, title: events.body.results[i]["value"].date});
-        res.render('home', {user: req.user, title: arr});
-      }
-    });
-});
+app.get('/', events.getEvent);
 
 app.get('/p/:id', function(req, res) {
   db.get('Event', req.param("id"))
