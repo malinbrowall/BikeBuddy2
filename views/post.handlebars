@@ -6,31 +6,40 @@
   <div class="jumbotron">
     <h1>Add Event</h1>
 </div>
-  <script src="script.js"></script>
+
 
 
 <!--formulär-->
-<div class="row">
+<h1> Create the best bikeevent ever <img src="https://cdn1.iconfinder.com/data/icons/travel-line-icons-vol-3/48/096-512.png" alt="Bike icon" height="40" width="40"></h1>
+<div class="form-group">
   <form method="POST" action="/topic" class="small-12 columns medium-6">
-    <div class="row">
-      <div class="small-12 columns">
-        <label>Subject</label>
-        <input type="text" placeholder="Title of convo" name="title"/>
+      <div class="col-sm-3">
+        <label>Event name</label>
+        <input type="text" class="form-control" placeholder="Add a short, clear name" name="title"/>
       </div>
-    </div>
-    <div class="row">
-      <div class="small-12 columns">
-        <label>Subject Matter</label>
-        <textarea placeholder="What do you want to talk about?" name="subject" class="commentBox"></textarea>
+      <div class="col-sm-2">
+        <Label> Pick a date</label>
+        <input type="text" class="form-control" name="date" id="dp" onclick="$('#dp').datepicker();$('#dp').datepicker('show');" placeholder= "Choose Date">
       </div>
-    </div>
-    <div class="row">
-      <div class="small-12 medium-4 columns small-centered">
-        <input type="submit" value="Create New Topic" class="button postfix"/>
+      <div class="col-sm-8">
+        <label>Description</label>
+        <textarea placeholder="Tell people more about the event" name="subject" class="form-control"></textarea>
       </div>
-    </div>
+      <div class="form-group">
+		      <div class="col-sm-offset-2 col-sm-6">
+			         <button type="submit" value="Create new event" class="btn btn-default">Submit</button>
+		      </div>
+      </div>
+
   </form>
 </div>
+
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/></link>
+
+
+<script src="s
 
 
 <!--Om användaren inte är inloggad visas denna-->
