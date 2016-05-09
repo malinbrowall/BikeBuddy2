@@ -201,13 +201,22 @@ app.post('/topic', function (req, res){
   , datum =req.param("datum")
   , min = req.param("min")
   , max = req.param("max")
+  , start = req.param("start")
+  , end = req.param("end")
+
 
 
 
   db.post('Event', {
     "titles" : title,
     "desc" : subject,
-    "date" : date
+    "date" : date,
+    "min" : min,
+    "max" : max,
+    "datum" : datum,
+    "start" : start,
+    "end" : end
+
   })
   .then(function (result) {
     var responseKey = result.headers.location.split("/")[3];
@@ -235,6 +244,12 @@ app.get('/p/:id', function(req, res) {
       res.render('newevent', {
         title: results.body["titles"],
         content: results.body["desc"],
+        content: results.body["min"],
+        content: results.body["max"],
+        content: results.body["datum"],
+        content: results.body["start"],
+        content: results.body["end"],
+
         responses: events.body.results
       });
     });
