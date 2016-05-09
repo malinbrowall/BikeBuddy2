@@ -1,12 +1,15 @@
-
 var config = require('./config.json'), //config file contains all tokens and other private info
 db = require('orchestrate')(config.db); //config.db holds Orchestrate token
 
-
 exports.getEvent = function(req, res) {
   var arr = [];
-  db.list('Event', 'Bikebuddy')
-    .then(function (events){
+  //var offset = req.param("page") ? (req.param("page") - 1) * 10 : 0;
+
+  db.newSearchBuilder()
+  .collection('Event')
+  .limit(100)
+  .query('*')
+  .then(function (events){
       for(i=0; i < 100; i++){
 
         var title = events.body.results[i]["value"].titles;
