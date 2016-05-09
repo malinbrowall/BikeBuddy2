@@ -50,15 +50,24 @@ border-radius: 0px !important;
 /*formulär*/
 .form-group{
   background-color: #fff;
-  height: 210px;
+  height: 230px;
   width: 80%;
   margin-left: 10%;
   padding: 2%;
+  float:left;
 }
 .form-group button{
   margin-top: 5%;
   background-color: #d1e0e0;
   font-weight: bold;
+}
+.min,.max{
+  width: 55px;
+  float: left;
+}
+.max{
+  margin-top:25px;
+  margin-left: 10px;
 }
 
 .footer {
