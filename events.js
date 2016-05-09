@@ -13,10 +13,9 @@ exports.getEvent = function(req, res) {
       for(i=0; i < 100; i++){
 
         var title = events.body.results[i]["value"].titles;
-        var desc = events.body.results[i]["value"].desc;
-        var date = events.body.results[i]["value"].date;
+        var date = events.body.results[i]["value"].datum;
 
-        var result = title + '\n' + desc + '\n' + date;
+        var result = title + '\n' + date;
 
         arr.push(result);
         arr.toString();
