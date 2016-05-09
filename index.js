@@ -198,6 +198,11 @@ app.post('/topic', function (req, res){
   var title = req.param("title")
   , subject = req.param("subject")
   , date = moment().format('MMMM Do YYYY, h:mm:ss a')
+  , datum =req.param("datum")
+  , min = req.param("min")
+  , max = req.param("max")
+
+
 
   db.post('Event', {
     "titles" : title,
