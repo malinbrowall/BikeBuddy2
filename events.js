@@ -23,8 +23,6 @@ exports.getEvent = function(req, res) {
     });
 
 };
-
-
 exports.addEvent = function() {
   db.post('Event',{
     "title": "Test"
