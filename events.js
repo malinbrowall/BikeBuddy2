@@ -48,7 +48,7 @@ exports.postTopic = function(req, res) {
       "start" : start,
       "end" : end
 
-<<<<<<< HEAD
+
     })
     .then(function (result) {
       var responseKey = result.headers.location.split("/")[3];
@@ -68,7 +68,7 @@ exports.newTopic = function(req, res) {
     events.body.results.forEach(function (obj, index){
         events.body.results[index].date = moment.unix(obj.timestamp / 1000).format('MMMM Do YYYY, h:mm:ss a');
     });
-=======
+
 })
 .then(function (result) {
   var responseKey = result.headers.location.split("/")[3];
@@ -81,7 +81,7 @@ exports.newTopic = function(req, res) {
 exports.getTopic = function(req, res) {
   db.search('Event', '114f1a182002babf')
   .then(function (events) {
->>>>>>> origin
+
     res.render('infoEvent', {
     user: req.user,
      users: events.body.results,
@@ -100,8 +100,7 @@ exports.getTopic = function(req, res) {
   .fail(function (err) {
     console.log(err); // prints error
   });
-<<<<<<< HEAD
+
   });
-=======
->>>>>>> origin
+
 };
