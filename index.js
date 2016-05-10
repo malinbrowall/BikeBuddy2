@@ -160,14 +160,10 @@ app.post('/login', passport.authenticate('local-signin', {
   })
 );
 app.get('/', events.getEvent);
-<<<<<<< HEAD
 app.get('/p/:id', events.newTopic);
 app.post('/p/:id', events.postEvent);
 app.post('/topic', events.postTopic);
 
-
-
-=======
 
 app.get('/p/:id', function(req, res) {
   db.get('Event', req.param("id"))
@@ -271,7 +267,6 @@ app.get('/p/:id', function(req, res) {
   });
 });
 
->>>>>>> 75a67051ab176185fe81f9590af20c08b28f8381
 app.get('/auth/facebook', passport.authenticate('facebook'));
 app.get('/auth/facebook/callback',
   passport.authenticate('facebook', {
@@ -282,12 +277,6 @@ app.get('/auth/facebook/callback',
     res.redirect('/');
   });
 
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> 75a67051ab176185fe81f9590af20c08b28f8381
 //logs user out of site, deleting them from the session, and returns to homepage
 app.get('/logout', function(req, res){
   var name = fbName(req,res);
@@ -296,10 +285,6 @@ app.get('/logout', function(req, res){
   res.redirect('/');
   req.session.notice = "You have successfully been logged out " + name + "!";
 });
-
-
-
-//====================================
 
 
 //===============PORT=================
