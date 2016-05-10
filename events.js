@@ -21,7 +21,9 @@ exports.getEvent = function(req, res) {
         arr.toString();
 
         res.render('home', {user: req.user, title: arr});
+
       }
+
     });
 
 };

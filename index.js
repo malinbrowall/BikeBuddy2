@@ -14,6 +14,10 @@ var config = require('./config.json'), //config file contains all tokens and oth
 
 var app = express();
 
+var fbName = function(req,res) {
+  return req.user.displayName
+};
+
  app.use(express.static(__dirname + '/styles'));
  app.use(express.static(__dirname + '/maps'));
  app.use(express.static(__dirname + '/images'));
@@ -23,12 +27,10 @@ var app = express();
 
 // Passport session setup.
 passport.serializeUser(function(user, done) {
-  console.log("serializing " + user.username);
   done(null, user);
 });
 
 passport.deserializeUser(function(obj, done) {
-  console.log("deserializing " + obj);
   done(null, obj);
 });
 
@@ -203,6 +205,7 @@ app.post('/topic', function (req, res){
   , max = req.param("max")
   , start = req.param("start")
   , end = req.param("end")
+  , creator = fbName(req,res)
 
 
 
@@ -215,7 +218,8 @@ app.post('/topic', function (req, res){
     "max" : max,
     "datum" : datum,
     "start" : start,
-    "end" : end
+    "end" : end,
+    "creator" : creator,
 
   })
   .then(function (result) {
@@ -223,7 +227,7 @@ app.post('/topic', function (req, res){
     res.redirect('/p/' + responseKey);
   })
   .fail(function (err) {
-
+    console.log("Failed to post event");
   });
 });
 
@@ -266,10 +270,9 @@ app.get('/auth/facebook/callback',
     res.redirect('/');
   });
 
-
 //logs user out of site, deleting them from the session, and returns to homepage
 app.get('/logout', function(req, res){
-  var name = req.user.displayName;
+  var name = fbName(req,res);
   console.log("Logged out " + name + " with ID: " + req.user.id);
   req.logout();
   res.redirect('/');
