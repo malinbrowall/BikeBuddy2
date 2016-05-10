@@ -14,8 +14,9 @@ exports.getEvent = function(req, res) {
 
         var title = events.body.results[i]["value"].titles;
         var date = events.body.results[i]["value"].datum;
-
-        var result = title + '\n' + date;
+        var creator = events.body.results[i]["value"].creator;
+        //var attendants = events.body.results[i]["values"].attendants;
+        var result = title + '\n' + date + '\n' + 'Created by ' + creator;
 
         arr.push(result);
         arr.toString();
