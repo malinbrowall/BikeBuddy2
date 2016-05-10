@@ -26,5 +26,6 @@
   "bugs": {
     "url": "https://github.com/aqwes/BikeBuddy2/issues"
   },
-  "homepage": "https://github.com/aqwes/BikeBuddy2#readme"
+  "homepage": "https://github.com/aqwes/BikeBuddy2#readme",
+  "devDependencies": {}
 }

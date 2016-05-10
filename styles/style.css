@@ -55,6 +55,7 @@ border-radius: 0px !important;
   margin-left: 10%;
   padding: 2%;
   float:left;
+
 }
 .form-group button{
   margin-top: 5%;
@@ -64,6 +65,7 @@ border-radius: 0px !important;
 .min,.max{
   width: 55px;
   float: left;
+  margin-left: 15px;
 }
 .max{
   margin-top:25px;
