@@ -142,9 +142,6 @@ app.get('/post', function(req, res){
   res.render('post', {user: req.user});
 });
 
-app.get('/infoEvent', function(req, res){
-  res.render('infoEvent', {user: req.user});
-});
 
 //sends the request through our local signup strategy, and if successful takes user to homepage, otherwise returns then to signin page
 app.post('/local-reg', passport.authenticate('local-signup', {
@@ -160,8 +157,7 @@ app.post('/login', passport.authenticate('local-signin', {
   })
 );
 app.get('/', events.getEvent);
-app.get('/p/:id', events.newTopic);
-app.post('/p/:id', events.postEvent);
+app.get('/p/', events.getTopic);
 app.post('/topic', events.postTopic);
 
 
