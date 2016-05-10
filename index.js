@@ -140,6 +140,10 @@ app.get('/post', function(req, res){
   res.render('post', {user: req.user});
 });
 
+app.get('/infoEvent', function(req, res){
+  res.render('infoEvent', {user: req.user});
+});
+
 //sends the request through our local signup strategy, and if successful takes user to homepage, otherwise returns then to signin page
 app.post('/local-reg', passport.authenticate('local-signup', {
   successRedirect: '/',
@@ -153,108 +157,12 @@ app.post('/login', passport.authenticate('local-signin', {
   failureRedirect: '/signin'
   })
 );
-
 app.get('/', events.getEvent);
-
-app.get('/p/:id', function(req, res) {
-  db.get('Event', req.param("id"))
-  .then(function (results){
-    db.newEventReader()
-    .from('Event', req.param("id"))
-    .type('post')
-    .then(function (events){
-
-      events.body.results.forEach(function (obj, index){
-          events.body.results[index].date = moment.unix(obj.timestamp / 1000).format('MMMM Do YYYY, h:mm:ss a');
-      });
-
-      res.render('home', {
-        title: results.body["titles"],
-        content: results.body["desc"],
-        responses: events.body.results
-      });
-    });
-  });
-});
+app.get('/p/:id', events.newTopic);
+app.post('/p/:id', events.postEvent);
+app.post('/topic', events.postTopic);
 
 
-app.post('/p/:id', function(req, res) {
-  var id = req.param("id")
-  , post = {
-    text: req.param("answer")
-  }
-
-  db.newEventBuilder()
-    .from('Event', id)
-    .type('post')
-    .data(post)
-    .then(function (results){
-      res.redirect("/p/" + id);
-    });
-});
-
-/** POST / create a new topic **/
-app.post('/topic', function (req, res){
-  var title = req.param("title")
-  , subject = req.param("subject")
-  , date = moment().format('MMMM Do YYYY, h:mm:ss a')
-  , datum =req.param("datum")
-  , min = req.param("min")
-  , max = req.param("max")
-  , start = req.param("start")
-  , end = req.param("end")
-
-
-
-
-  db.post('Event', {
-    "titles" : title,
-    "desc" : subject,
-    "date" : date,
-    "min" : min,
-    "max" : max,
-    "datum" : datum,
-    "start" : start,
-    "end" : end
-
-  })
-  .then(function (result) {
-    var responseKey = result.headers.location.split("/")[3];
-    res.redirect('/p/' + responseKey);
-  })
-  .fail(function (err) {
-
-  });
-});
-
-
-
-app.get('/p/:id', function(req, res) {
-  db.get('Event', req.param("id"))
-  .then(function (results){
-    db.newEventReader()
-    .from('Event', req.param("id"))
-    .type('post')
-    .then(function (events){
-
-      events.body.results.forEach(function (obj, index){
-          events.body.results[index].date = moment.unix(obj.timestamp / 1000).format('MMMM Do YYYY, h:mm:ss a');
-      });
-
-      res.render('newevent', {
-        title: results.body["titles"],
-        content: results.body["desc"],
-        content: results.body["min"],
-        content: results.body["max"],
-        content: results.body["datum"],
-        content: results.body["start"],
-        content: results.body["end"],
-
-        responses: events.body.results
-      });
-    });
-  });
-});
 
 app.get('/auth/facebook', passport.authenticate('facebook'));
 app.get('/auth/facebook/callback',
@@ -267,6 +175,8 @@ app.get('/auth/facebook/callback',
   });
 
 
+
+
 //logs user out of site, deleting them from the session, and returns to homepage
 app.get('/logout', function(req, res){
   var name = req.user.displayName;
@@ -275,6 +185,8 @@ app.get('/logout', function(req, res){
   res.redirect('/');
   req.session.notice = "You have successfully been logged out " + name + "!";
 });
+
+
 
 //====================================
 
