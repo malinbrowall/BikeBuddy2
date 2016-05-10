@@ -29,24 +29,45 @@ exports.getEvent = function(req, res) {
 };
 
 exports.postTopic = function(req, res) {
-var title = req.param("title")
-, subject = req.param("subject")
-, date = moment().format('MMMM Do YYYY, h:mm:ss a')
-, datum =req.param("datum")
-, min = req.param("min")
-, max = req.param("max")
-, start = req.param("start")
-, end = req.param("end")
+  var title = req.param("title")
+    , subject = req.param("subject")
+    , date = moment().format('MMMM Do YYYY, h:mm:ss a')
+    , datum =req.param("datum")
+    , min = req.param("min")
+    , max = req.param("max")
+    , start = req.param("start")
+    , end = req.param("end")
 
-db.post('Event', {
-  "titles" : title,
-  "desc" : subject,
-  "date" : date,
-  "min" : min,
-  "max" : max,
-  "datum" : datum,
-  "start" : start,
-  "end" : end
+    db.post('Event', {
+      "titles" : title,
+      "desc" : subject,
+      "date" : date,
+      "min" : min,
+      "max" : max,
+      "datum" : datum,
+      "start" : start,
+      "end" : end
+
+
+    })
+    .then(function (result) {
+      var responseKey = result.headers.location.split("/")[3];
+      res.redirect('/p/' + responseKey);
+    })
+    .fail(function (err) {});
+};
+
+exports.newTopic = function(req, res) {
+  db.get('Event', req.param("id"))
+  .then(function (results){
+    db.newEventReader()
+  .from('Event', req.param("id"))
+  .type('post')
+  .then(function (events){
+
+    events.body.results.forEach(function (obj, index){
+        events.body.results[index].date = moment.unix(obj.timestamp / 1000).format('MMMM Do YYYY, h:mm:ss a');
+    });
 
 })
 .then(function (result) {
@@ -60,6 +81,7 @@ db.post('Event', {
 exports.getTopic = function(req, res) {
   db.search('Event', '114f1a182002babf')
   .then(function (events) {
+
     res.render('infoEvent', {
     user: req.user,
      users: events.body.results,
@@ -78,4 +100,7 @@ exports.getTopic = function(req, res) {
   .fail(function (err) {
     console.log(err); // prints error
   });
+
+  });
+
 };
