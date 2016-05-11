@@ -158,7 +158,39 @@ app.post('/login', passport.authenticate('local-signin', {
 );
 app.get('/', events.getEvent);
 app.get('/p/', events.getTopic);
-app.post('/topic', events.postTopic);
+
+app.post('/topic', function(req, res) {
+var title = req.param("title")
+, subject = req.param("subject")
+, date = moment().format('MMMM Do YYYY, h:mm:ss a')
+, datum =req.param("datum")
+, min = req.param("min")
+, max = req.param("max")
+, start = req.param("start")
+, end = req.param("end")
+, creator = fbName(req, res)
+, attendants = fbName(req, res)
+
+db.post('Event', {
+  "titles" : title,
+  "desc" : subject,
+  "date" : date,
+  "min" : min,
+  "max" : max,
+  "datum" : datum,
+  "start" : start,
+  "end" : end,
+  "creator": creator,
+  "attendants": attendants
+
+})
+.then(function (result) {
+  var responseKey = result.headers.location.split("/")[3];
+  res.redirect('/');
+})
+.fail(function (err) {
+});
+});
 
 
 app.get('/auth/facebook', passport.authenticate('facebook'));
