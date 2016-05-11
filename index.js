@@ -159,6 +159,8 @@ app.post('/login', passport.authenticate('local-signin', {
 app.get('/', events.getEvent);
 app.get('/p/', events.getTopic);
 
+app.get('/attend/', events.getKey);
+
 app.post('/topic', function(req, res) {
 var title = req.param("title")
 , subject = req.param("subject")
