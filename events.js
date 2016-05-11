@@ -2,10 +2,27 @@ var config = require('./config.json'), //config file contains all tokens and oth
 db = require('orchestrate')(config.db),
 moment = require('moment'); //config.db holds Orchestrate token
 
+//Get key from event.
+exports.getKey = function(req, res){
+  var arrKey = [];
+  db.newSearchBuilder()
+  .collection('Event')
+  .limit(100)
+  .query('*')
+  .then(function (events){
+      for(i=0; i < 100; i++){
+        var key = events.body.results[i].path.key;
+        arrKey.push(key);
+        arrKey.toString();
+        console.log(arrKey);
+      }
+
+    });
+};
+//Get title, date, creator from event.
 exports.getEvent = function(req, res) {
   var arr = [];
-  var keyArr = [];
-  //var offset = req.param("page") ? (req.param("page") - 1) * 10 : 0;
+  var arrKey = [];
   db.newSearchBuilder()
   .collection('Event')
   .limit(100)
@@ -16,57 +33,29 @@ exports.getEvent = function(req, res) {
         var title = events.body.results[i]["value"].titles;
         var date = events.body.results[i]["value"].datum;
         var creator = events.body.results[i]["value"].creator;
-        var key = events.body.results[i]["path"].key;
-        //var attendants = events.body.results[i]["values"].attendants;
-        var result = title + '\n' + date + '\n' + 'Created by ' + creator + key;
+
+        var key = events.body.results[i].path.key;
+
+        var result = title + '\n' + date + '\n' + 'Created by ' + creator;
 
         arr.push(result);
         arr.toString();
 
-        keyArr.push(key);
-        keyArr.toString();
-        console.console.log(key);
-        res.render('home', {user: req.user, title: arr, key: arr});
+        arrKey.push(key);
+        arrKey.toString();
+
+        res.render('home', {user: req.user, title: arr, key: arrKey});
 
       }
 
     });
 };
-
-exports.postTopic = function(req, res) {
-var title = req.param("title")
-, subject = req.param("subject")
-, date = moment().format('MMMM Do YYYY, h:mm:ss a')
-, datum =req.param("datum")
-, min = req.param("min")
-, max = req.param("max")
-, start = req.param("start")
-, end = req.param("end")
-
-db.post('Event', {
-  "titles" : title,
-  "desc" : subject,
-  "date" : date,
-  "min" : min,
-  "max" : max,
-  "datum" : datum,
-  "start" : start,
-  "end" : end
-
-})
-.then(function (result) {
-  var responseKey = result.headers.location.split("/")[3];
-  res.redirect('/');
-})
-.fail(function (err) {
-});
-};
-
+//Get everything from events database.
 exports.getTopic = function(req, res) {
-  db.search('Event', '114f1a182002babf')
+  db.list('Event')
   .then(function (events) {
     res.render('infoEvent', {
-    user: req.user,
+     user: req.user,
      users: events.body.results,
      title: events.body.results[0]["value"].titles,
      desc: events.body.results[0]["value"].desc,
