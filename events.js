@@ -4,6 +4,7 @@ moment = require('moment'); //config.db holds Orchestrate token
 
 exports.getEvent = function(req, res) {
   var arr = [];
+  var keyArr = [];
   //var offset = req.param("page") ? (req.param("page") - 1) * 10 : 0;
   db.newSearchBuilder()
   .collection('Event')
@@ -15,13 +16,17 @@ exports.getEvent = function(req, res) {
         var title = events.body.results[i]["value"].titles;
         var date = events.body.results[i]["value"].datum;
         var creator = events.body.results[i]["value"].creator;
+        var key = events.body.results[i]["path"].key;
         //var attendants = events.body.results[i]["values"].attendants;
-        var result = title + '\n' + date + '\n' + 'Created by ' + creator;
+        var result = title + '\n' + date + '\n' + 'Created by ' + creator + key;
 
         arr.push(result);
         arr.toString();
 
-        res.render('home', {user: req.user, title: arr});
+        keyArr.push(key);
+        keyArr.toString();
+        console.console.log(key);
+        res.render('home', {user: req.user, title: arr, key: arr});
 
       }
 
