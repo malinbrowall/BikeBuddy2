@@ -60,18 +60,28 @@ border-radius: 0px !important;
   margin-top: 5%;
   font-weight: bold;
 }
+
+.form-group label{
+  margin-top: 4%;
+}
 .min,.max{
   width: 55px;
   float: left;
   margin-left: 15px;
 }
 .max{
-  margin-top:25px;
+  margin-top:49px;
   margin-left: 10px;
+
 }
+
+.min label{
+  margin-top: 45%;
+}
+
 
 .footer {
   background-color: #FFF;
-	padding-top: 0.5%;
-
+	padding: 1% 1% 0% 1%;
+  font-size: 14px;
 }
