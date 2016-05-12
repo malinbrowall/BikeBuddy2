@@ -164,10 +164,11 @@ app.get('/attend/', function(req, res){
   db.newSearchBuilder()
   .collection('Event')
   .limit(100)
-  .query('*')
+  .query('@path.key:1159aa268602f632')
   .then(function (events){
     for (i = 0; i < 100; i++){
         attendants = events.body.results[i]["value"].attendants;
+        newName = req.user.displayName;
         db.merge('Event', '1159aa268602f632',{
           'attendants': attendants + '  ' + fbName(req, res)
         });
