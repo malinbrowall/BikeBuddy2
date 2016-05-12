@@ -1,0 +1,50 @@
+
+{{#if user}}
+  <div class="jumbotron">
+    <h1> {{title}} <img src="https://cdn1.iconfinder.com/data/icons/travel-line-icons-vol-3/48/096-512.png" alt="Bike icon" height="40" width="40"></h1>
+</div>
+
+<!--formulär-->
+
+      <div class="col-sm-8">
+        <label>Description: {{desc}}</label>
+      </div>
+      <div class="col-sm-8">
+        <label>Date:{{date}}</label>
+      </div>
+      <div class="col-sm-8">
+        <label>Min: {{min}}</label>
+      </div>
+      <div class="col-sm-8">
+        <label>Max: {{max}}</label>
+      </div>
+      <div class="col-sm-8">
+          <label>Start: {{start}}</label>
+      </div>
+      <div class="col-sm-8">
+        <label>End: {{end}}</label>
+      </div>
+      <div class="col-sm-8">
+        <label>Creator: {{creator}}</label>
+      </div>
+
+
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/></link>
+
+
+<!--Om användaren inte är inloggad visas denna-->
+{{else}}
+    <div class="jumbotron">
+  <h1>Sign in</h1>
+  <p>Welcome to Bikebuddy</p>
+  <p>If you want to create a new event, you have to sign in!</p>
+  <p>
+</div>
+<div class="col-md-offset-4">
+    <a href="/auth/facebook/" class="btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-user"></span> Sign in with Facebook</a>
+  </p>
+</div>
+
+{{/if}}
