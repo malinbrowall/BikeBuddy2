@@ -170,7 +170,7 @@ app.get('/attend/', function(req, res){
     for (i = 0; i < 100; i++){
         attendants = events.body.results[i]["value"].attendants;
         newName = req.user.displayName;
-        db.merge('Event', '1158bbe95d02baba',{
+        db.merge('Event', '11599b30f102f631',{
           'attendants': attendants + '  ' + fbName(req, res)
         });
     }
@@ -187,7 +187,7 @@ app.post('/topic', function(req, res) {
     start = req.param("start"),
     end = req.param("end"),
     creator = fbName(req, res),
-    attendants = [fbName(req, res)]
+    attendants = fbName(req, res)
 
   db.post('Event', {
     "titles" : title,
