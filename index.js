@@ -158,7 +158,12 @@ app.post('/login', passport.authenticate('local-signin', {
 );
 app.get('/', events.getEvent);
 app.get('/p/', events.getTopic);
-app.get('/attend/', events.getKey);
+
+app.get('/attend/', function(req, res){
+  db.merge('Event', '11552f74cf02b2bd',{
+    'attendants': fbName(req, res)
+  });
+});
 
 app.post('/topic', function(req, res) {
   var title = req.param("title"),
@@ -193,7 +198,6 @@ app.post('/topic', function(req, res) {
 
   });
 });
-
 
 app.get('/auth/facebook', passport.authenticate('facebook'));
 app.get('/auth/facebook/callback',
