@@ -161,7 +161,6 @@ app.get('/p/', events.getTopic);
 
 app.get('/attend/', function(req, res){
   var attendants;
-  var newName;
   db.newSearchBuilder()
   .collection('Event')
   .limit(100)
@@ -169,8 +168,7 @@ app.get('/attend/', function(req, res){
   .then(function (events){
     for (i = 0; i < 100; i++){
         attendants = events.body.results[i]["value"].attendants;
-        newName = req.user.displayName;
-        db.merge('Event', '11599b30f102f631',{
+        db.merge('Event', '1159aa268602f632',{
           'attendants': attendants + '  ' + fbName(req, res)
         });
     }
