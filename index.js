@@ -15,7 +15,7 @@ var config = require('./config.json'), //config file contains all tokens and oth
 var app = express();
 
 var fbName = function(req,res) {
-  return req.user.displayName
+  return req.user.displayName;
 };
 
  app.use(express.static(__dirname + '/styles'));
@@ -160,9 +160,21 @@ app.get('/', events.getEvent);
 app.get('/p/', events.getTopic);
 
 app.get('/attend/', function(req, res){
-  db.merge('Event', '11552f74cf02b2bd',{
-    'attendants': fbName(req, res)
-  });
+  var attendants;
+  var newName;
+  db.newSearchBuilder()
+  .collection('Event')
+  .limit(100)
+  .query('*')
+  .then(function (events){
+    for (i = 0; i < 100; i++){
+        attendants = events.body.results[i]["value"].attendants;
+        newName = req.user.displayName;
+        db.merge('Event', '1158bbe95d02baba',{
+          'attendants': attendants + '  ' + fbName(req, res)
+        });
+    }
+});
 });
 
 app.post('/topic', function(req, res) {
@@ -175,7 +187,7 @@ app.post('/topic', function(req, res) {
     start = req.param("start"),
     end = req.param("end"),
     creator = fbName(req, res),
-    attendants = fbName(req, res)
+    attendants = [fbName(req, res)]
 
   db.post('Event', {
     "titles" : title,
