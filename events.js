@@ -53,21 +53,28 @@ exports.getEvent = function(req, res) {
 //Get everything from events database.
 exports.getTopic = function(req, res) {
   console.log("hjedfdffd");
-  db.get('Event', req.param("id"))
-      .then(function (events){
-    res.render('infoEvent', {
-     user: req.user,
-     users: events.body.results,
-     title: events.body.results[0]["value"].titles,
-     desc: events.body.results[0]["value"].desc,
-     date: events.body.results[0]["value"].date,
-     min: events.body.results[0]["value"].min,
-     max: events.body.results[0]["value"].max,
-     start: events.body.results[0]["value"].start,
-     end: events.body.results[0]["value"].end,
-     creator: events.body.results[0]["value"].creator
- });
-  })
+  db.newSearchBuilder()
+  .collection('Event')
+  .query(req.param("id"))
+  .then(function(events){
+
+      events.body.results.forEach(function (obj, index){
+      events.body.results[index].titles;
+
+      res.render('infoEvent', {
+       user: req.user,
+       users: events.body.results,
+       title: events.body.results[index]["value"].titles,
+       desc: events.body.results[index]["value"].desc,
+       date: events.body.results[index]["value"].date,
+       min: events.body.results[index]["value"].min,
+       max: events.body.results[index]["value"].max,
+       start: events.body.results[index]["value"].start,
+       end: events.body.results[index]["value"].end,
+       creator: events.body.results[index]["value"].creator
+     });
+    });
+})
   .fail(function (err) {
     console.log(err); // prints error
   });
