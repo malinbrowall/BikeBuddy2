@@ -13,7 +13,7 @@
     "express": "^3.5.0",
     "express3-handlebars": "^0.5.0",
     "moment": "^2.13.0",
-    "orchestrate": "^0.2.0",
+    "orchestrate": "^0.8.0",
     "passport": "^0.2.0",
     "passport-facebook": "^1.0.3",
     "passport-local": "^1.0.0",

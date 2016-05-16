@@ -15,7 +15,7 @@ var config = require('./config.json'), //config file contains all tokens and oth
 var app = express();
 
 var fbName = function(req,res) {
-  return req.user.displayName
+  return req.user.displayName;
 };
 
  app.use(express.static(__dirname + '/styles'));
@@ -158,7 +158,23 @@ app.post('/login', passport.authenticate('local-signin', {
 );
 app.get('/', events.getEvent);
 app.get('/p/', events.getTopic);
-app.get('/attend/', events.getKey);
+
+app.get('/attend/', function(req, res){
+  var attendants;
+  db.newSearchBuilder()
+  .collection('Event')
+  .limit(100)
+  .query('@path.key:1159aa268602f632')
+  .then(function (events){
+    for (i = 0; i < 100; i++){
+        attendants = events.body.results[i]["value"].attendants;
+        newName = req.user.displayName;
+        db.merge('Event', '1159aa268602f632',{
+          'attendants': attendants + '  ' + fbName(req, res)
+        });
+    }
+});
+});
 
 app.post('/topic', function(req, res) {
   var title = req.param("title"),
@@ -193,7 +209,6 @@ app.post('/topic', function(req, res) {
 
   });
 });
-
 
 app.get('/auth/facebook', passport.authenticate('facebook'));
 app.get('/auth/facebook/callback',

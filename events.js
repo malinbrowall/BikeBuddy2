@@ -33,10 +33,10 @@ exports.getEvent = function(req, res) {
         var title = events.body.results[i]["value"].titles;
         var date = events.body.results[i]["value"].datum;
         var creator = events.body.results[i]["value"].creator;
-
+        var attend = events.body.results[i]["value"].attendants;
         var key = events.body.results[i].path.key;
 
-        var result = title + '\n' + date + '\n' + 'Created by ' + creator;
+        var result = title + '\n' + date + '\n' + 'Created by: ' + creator + '\n' + 'Attending: ' + attend;
 
         arr.push(result);
         arr.toString();
