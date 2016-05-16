@@ -2,52 +2,31 @@ var config = require('./config.json'), //config file contains all tokens and oth
 db = require('orchestrate')(config.db),
 moment = require('moment'); //config.db holds Orchestrate token
 
-//Get key from event.
-exports.getKey = function(req, res){
-  var arrKey = [];
-  db.newSearchBuilder()
-  .collection('Event')
-  .limit(100)
-  .query('*')
-  .then(function (events){
-      for(i=0; i < 100; i++){
-        var key = events.body.results[i].path.key;
-        arrKey.push(key);
-        arrKey.toString();
-        console.log(arrKey);
-      }
-
-    });
-};
 //Get title, date, creator from event.
 exports.getEvent = function(req, res) {
   var arr = [];
   var arrKey = [];
   db.newSearchBuilder()
   .collection('Event')
-  .limit(100)
   .query('*')
   .then(function (events){
-      for(i=0; i < 100; i++){
+        events.body.results.forEach(function(obj, i){
+          var title = events.body.results[i]["value"].titles;
+          var date = events.body.results[i]["value"].datum;
+          var creator = events.body.results[i]["value"].creator;
+          var attend = events.body.results[i]["value"].attendants;
+          var key = events.body.results[i].path.key;
 
-        var title = events.body.results[i]["value"].titles;
-        var date = events.body.results[i]["value"].datum;
-        var creator = events.body.results[i]["value"].creator;
-        var attend = events.body.results[i]["value"].attendants;
-        var key = events.body.results[i].path.key;
+          var result = title + '\n' + date + '\n' + 'Created by: ' + creator + '\n' + 'Attending: ' + attend;
 
-        var result = title + '\n' + date + '\n' + 'Created by: ' + creator + '\n' + 'Attending: ' + attend;
+          arr.push(result);
+          arrKey.push(key);
 
-        arr.push(result);
-        arrKey.push(key);
+          arr.toString();
+          arrKey.toString();
 
-        arr.toString();
-        arrKey.toString();
-
-        res.render('home', {user: req.user, title: arr, key: arrKey});
-
-      }
-
+          res.render('home', {user: req.user, title: arr, key: arrKey});
+        });
     });
 };
 //Get everything from events database.
