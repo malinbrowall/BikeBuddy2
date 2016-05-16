@@ -39,9 +39,9 @@ exports.getEvent = function(req, res) {
         var result = title + '\n' + date + '\n' + 'Created by: ' + creator + '\n' + 'Attending: ' + attend;
 
         arr.push(result);
-        arr.toString();
-
         arrKey.push(key);
+
+        arr.toString();
         arrKey.toString();
 
         res.render('home', {user: req.user, title: arr, key: arrKey});
@@ -52,8 +52,9 @@ exports.getEvent = function(req, res) {
 };
 //Get everything from events database.
 exports.getTopic = function(req, res) {
-  db.list('Event')
-  .then(function (events) {
+  console.log("hjedfdffd");
+  db.get('Event', req.param("id"))
+      .then(function (events){
     res.render('infoEvent', {
      user: req.user,
      users: events.body.results,
@@ -66,8 +67,6 @@ exports.getTopic = function(req, res) {
      end: events.body.results[0]["value"].end,
      creator: events.body.results[0]["value"].creator
  });
-    console.log(users);
-   // prints matched users
   })
   .fail(function (err) {
     console.log(err); // prints error

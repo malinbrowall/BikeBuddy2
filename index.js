@@ -157,7 +157,7 @@ app.post('/login', passport.authenticate('local-signin', {
   })
 );
 app.get('/', events.getEvent);
-app.get('/p/', events.getTopic);
+app.get('/p/:id', events.getTopic);
 
 app.get('/attend/', function(req, res){
   var attendants;
