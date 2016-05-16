@@ -158,7 +158,6 @@ app.post('/login', passport.authenticate('local-signin', {
 );
 app.get('/', events.getEvent);
 app.get('/p/:id', events.getTopic);
-
 app.get('/attend/:id', function(req, res){
   var attendants;
   db.newSearchBuilder()
