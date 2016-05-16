@@ -157,23 +157,22 @@ app.post('/login', passport.authenticate('local-signin', {
   })
 );
 app.get('/', events.getEvent);
-app.get('/p/', events.getTopic);
-
-app.get('/attend/', function(req, res){
+app.get('/p/:id', events.getTopic);
+app.get('/attend/:id', function(req, res){
   var attendants;
   db.newSearchBuilder()
   .collection('Event')
-  .limit(100)
-  .query('@path.key:1159aa268602f632')
+  .query(req.param("id"))
   .then(function (events){
-    for (i = 0; i < 100; i++){
-        attendants = events.body.results[i]["value"].attendants;
-        newName = req.user.displayName;
-        db.merge('Event', '1159aa268602f632',{
-          'attendants': attendants + '  ' + fbName(req, res)
-        });
-    }
-});
+    events.body.results.forEach(function(obj ,i){
+      attendants = events.body.results[i]["value"].attendants;
+      db.merge('Event', req.param("id"),{
+        'attendants': attendants + '  ' + fbName(req, res)
+      });
+    });
+
+  });
+  res.redirect('/');
 });
 
 app.post('/topic', function(req, res) {
