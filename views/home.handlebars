@@ -17,18 +17,19 @@
 <!--event-->
 
 {{# each title}}
+{{# each ../key}}
 <section class="panel-group" >
 	<div class="panel panel-default col-md-7">
 
-    <p> EVENTS : {{this}}</p>
-
+    <p> EVENTS : {{../this}} KEY : {{this}}</p>
     <div id="demo"></div>
-			<p><a href="/p/" role="button" class="btn btn-default">View details »</a>
+			<p><a href="/p/#" role="button" class="btn btn-default">View details »</a>
         <a href="/attend/" role="button" class="btn btn-default">Attend »</a>
       </p>
   </div><br>
 	<div class="panel panel-default col-md-7">
 </section>
+{{/each}}
 {{/each}}
 
 {{else}}

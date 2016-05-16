@@ -168,12 +168,12 @@ app.get('/attend/', function(req, res){
   .then(function (events){
     for (i = 0; i < 100; i++){
         attendants = events.body.results[i]["value"].attendants;
-        newName = req.user.displayName;
         db.merge('Event', '1159aa268602f632',{
           'attendants': attendants + '  ' + fbName(req, res)
         });
     }
-});
+  });
+  res.redirect('/');
 });
 
 app.post('/topic', function(req, res) {
