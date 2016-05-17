@@ -18,9 +18,11 @@
 {{# each title}}
 <section class="panel-group" >
 	<div class="panel panel-default col-md-7">
-      <p>
-        <a id="image" img src ="" width="500" height="250" ></a>
-        </p>
+
+    <p>
+      <img id="image" src ="" width="500" height="250" ></a>
+      </p>
+
     <div id="demo">{{this}}</div>
 			<p><a id="key" href="" role="button" class="btn btn-default">View details »</a>
         <a href="/attend/{{../this}}" role="button" class="btn btn-default">Attend »</a>
@@ -31,19 +33,21 @@
 </section>
 {{/each}}
 
-{{# each key}}
-<script>
-console.log("sd");
-document.getElementById("key").href = "/p/{{this}}";
 
-</script>
-{{/each}}
 
 {{# each img}}
-<script>
+<script type="text/javascript">
 document.getElementById("image").src= "{{this}}";
 </script>
 {{/each}}
+
+{{# each key}}
+<script type="text/javascript">
+document.getElementById("key").href = "/p/{{this}}";
+</script>
+{{/each}}
+
+
 
 
 {{else}}
