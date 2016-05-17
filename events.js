@@ -6,6 +6,7 @@ moment = require('moment'); //config.db holds Orchestrate token
 exports.getEvent = function(req, res) {
   var arr = [];
   var arrKey = [];
+  var imgArr = [];
   db.newSearchBuilder()
   .collection('Event')
   .query('*')
@@ -14,17 +15,20 @@ exports.getEvent = function(req, res) {
           var title = events.body.results[i]["value"].titles;
           var date = events.body.results[i]["value"].datum;
           var creator = events.body.results[i]["value"].creator;
+          var image = events.body.results[i]["value"].image;
           var key = events.body.results[i].path.key;
 
           var result = title + '\n' + date + '\n' + 'Created by: ' + creator;
 
           arr.push(result);
           arrKey.push(key);
+          imgArr.push(image);
 
           arr.toString();
           arrKey.toString();
+          imgArr.toString();
 
-          res.render('home', {user: req.user, title: arr, key: arrKey});
+          res.render('home', {user: req.user, title: arr, key: arrKey, img: imgArr});
         });
     });
 };

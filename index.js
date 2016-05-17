@@ -185,7 +185,8 @@ app.post('/topic', function(req, res) {
     start = req.param("start"),
     end = req.param("end"),
     creator = fbName(req, res),
-    attendants = fbName(req, res)
+    attendants = fbName(req, res),
+    image = req.param("image")
 
   db.post('Event', {
     "titles" : title,
@@ -197,7 +198,8 @@ app.post('/topic', function(req, res) {
     "start" : start,
     "end" : end,
     "creator": creator,
-    "attendants": attendants
+    "attendants": attendants,
+    "image" : image
 
   })
   .then(function (result) {
