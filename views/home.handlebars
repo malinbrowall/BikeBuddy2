@@ -16,20 +16,25 @@
 
 <!--event-->
 
-{{# each title}}
+{{# each key}}
+{{# each ../img}}
 <section class="panel-group" >
 	<div class="panel panel-default col-md-7">
 
-    <p> EVENTS : {{this}}</p>
-
+      <a>
+       <img src = "{{this}}" width="500" height="250"/>
+  </a>
     <div id="demo"></div>
-			<p><a href="/p/" role="button" class="btn btn-default">View details »</a>
-        <a href="/attend/" role="button" class="btn btn-default">Attend »</a>
+			<p><a href="/p/{{../this}}" role="button" class="btn btn-default">View details »</a>
+        <a href="/attend/{{../this}}" role="button" class="btn btn-default">Attend »</a>
+        <a href="/unattend/{{../this}}" role="button" class="btn btn-default">Un Attend »</a>
       </p>
   </div><br>
 	<div class="panel panel-default col-md-7">
 </section>
 {{/each}}
+{{/each}}
+
 
 {{else}}
 <div class="jumbotron">

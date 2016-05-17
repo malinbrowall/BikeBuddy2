@@ -4,9 +4,6 @@
     function Mapster(element, opts){
       this.gMap = new google.maps.Map(element, opts);
       this.markers = List.create();
-      if(opts.cluster){
-      this.markerClusterer = new MarkerClusterer(this.gMap, [], opts.cluster.options);
-    }
     if(opts.geocoder){
       this.geocoder = new google.maps.Geocoder();
     }
