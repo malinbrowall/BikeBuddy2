@@ -14,10 +14,9 @@ exports.getEvent = function(req, res) {
           var title = events.body.results[i]["value"].titles;
           var date = events.body.results[i]["value"].datum;
           var creator = events.body.results[i]["value"].creator;
-          var attend = events.body.results[i]["value"].attendants;
           var key = events.body.results[i].path.key;
 
-          var result = title + '\n' + date + '\n' + 'Created by: ' + creator + '\n' + 'Attending: ' + attend;
+          var result = title + '\n' + date + '\n' + 'Created by: ' + creator;
 
           arr.push(result);
           arrKey.push(key);
@@ -31,7 +30,6 @@ exports.getEvent = function(req, res) {
 };
 //Get everything from events database.
 exports.getTopic = function(req, res) {
-  console.log("hjedfdffd");
   db.newSearchBuilder()
   .collection('Event')
   .query(req.param("id"))
@@ -50,7 +48,8 @@ exports.getTopic = function(req, res) {
        max: events.body.results[index]["value"].max,
        start: events.body.results[index]["value"].start,
        end: events.body.results[index]["value"].end,
-       creator: events.body.results[index]["value"].creator
+       creator: events.body.results[index]["value"].creator,
+       attendants: events.body.results[index]["value"].attendants
      });
     });
 })
