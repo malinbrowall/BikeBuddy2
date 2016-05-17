@@ -18,7 +18,6 @@
 {{# each title}}
 <section class="panel-group" >
 	<div class="panel panel-default col-md-7">
-
     <p>
       <img id="image" src ="" width="500" height="250" ></a>
       </p>
@@ -34,11 +33,12 @@
 {{/each}}
 
 
-
 {{# each img}}
 <script type="text/javascript">
 document.getElementById("image").src= "{{this}}";
 </script>
+
+
 {{/each}}
 
 {{# each key}}

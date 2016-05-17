@@ -24,10 +24,6 @@ exports.getEvent = function(req, res) {
           arrKey.push(key);
           imgArr.push(image);
 
-          arr.toString();
-          arrKey.toString();
-          imgArr.toString();
-
           res.render('home', {user: req.user, title: arr, key: arrKey, img: imgArr});
         });
     });
