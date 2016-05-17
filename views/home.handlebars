@@ -15,17 +15,14 @@
   </div>
 
 <!--event-->
-
-{{# each key}}
-{{# each ../img}}
+{{# each title}}
 <section class="panel-group" >
 	<div class="panel panel-default col-md-7">
-
-      <a>
-       <img src = "{{this}}" width="500" height="250"/>
-  </a>
-    <div id="demo"></div>
-			<p><a href="/p/{{../this}}" role="button" class="btn btn-default">View details »</a>
+      <p>
+        <a id="image" img src ="" width="500" height="250" ></a>
+        </p>
+    <div id="demo">{{this}}</div>
+			<p><a id="key" href="" role="button" class="btn btn-default">View details »</a>
         <a href="/attend/{{../this}}" role="button" class="btn btn-default">Attend »</a>
         <a href="/unattend/{{../this}}" role="button" class="btn btn-default">Un Attend »</a>
       </p>
@@ -33,6 +30,19 @@
 	<div class="panel panel-default col-md-7">
 </section>
 {{/each}}
+
+{{# each key}}
+<script>
+console.log("sd");
+document.getElementById("key").href = "/p/{{this}}";
+
+</script>
+{{/each}}
+
+{{# each img}}
+<script>
+document.getElementById("image").src= "{{this}}";
+</script>
 {{/each}}
 
 
