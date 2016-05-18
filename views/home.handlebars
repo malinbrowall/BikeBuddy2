@@ -5,13 +5,6 @@
     <p id="time"></p>
   </div>
   <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">Profile Information</h3>
-    </div>
-    <div class="panel-body">
-      <p>ID: {{user.id}}</p>
-<p>Name :{{user.displayName}}</p>
-    </div>
   </div>
 
 <!--event-->
@@ -20,9 +13,9 @@
 <section class="panel-group" >
 	<div class="panel panel-default col-md-7">
 <div id="{{this.[0].title}}"></div>
-      <a>
-       <img src = "{{this.[0].image}}" width="500" height="250"/>
-     </a>
+      <p>
+       <img src = "{{this.[0].image}}" width="400" height="200"/>
+     </p>
 
 			<p><a href="/p/{{this.[0].key}}" role="button" class="btn btn-default">View details »</a>
         <a href="/attend/{{this.[0].key}}" role="button" class="btn btn-default">Attend »</a>

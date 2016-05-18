@@ -57,6 +57,19 @@ background-color: #000;
   float:left;
 
 }
+.panel-group{
+  height: 40%;
+  width: 60%;
+  padding: 2%;
+  margin: auto;
+padding: 10px;
+
+
+}
+.panel panel-default col-md-7{
+    width: 100%;
+
+}
 .form-group button{
   margin-top: 5%;
   font-weight: bold;
