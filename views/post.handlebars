@@ -20,7 +20,7 @@
 
       <div class="col-sm-12">
         <label>Image URL</label>
-        <input type="text" class="form-control" placeholder="Add an iamge URL" name="image"/>
+        <input type="text" class="form-control" placeholder="Add an image URL" name="image"/>
       </div>
 
       <div class="col-sm-8">
@@ -36,27 +36,26 @@
         <input type="text" class="form-control" placeholder="Destination Address" name="end"/>
       </div>
 
-      <div class="box">
-          <div class="min">
-            <label> Participants </label>
-            <input type="text" class="form-control" name="min" placeholder="Min" onkeypress='return event.charCode >= 48 && event.charCode <= 57'></input>
-          </div>
-          <div class="max">
-            <input type="text" class="form-control" name="max" placeholder="Max" onkeypress='return event.charCode >= 48 && event.charCode <= 57'></input>
-          </div>
-      </div>
       <div class="col-xs-12 col-sm-12">
         <label>Description</label>
         <textarea placeholder="Tell people more about the event" name="subject" class="form-control"></textarea>
       </div>
       <div class="form-group">
 		      <div class=" col-xs-offset-3 col-xs-6 col-sm-offset-4 col-sm-6">
-			         <button type="submit" value="Create new event" class="btn btn-success">Submit</button>
+			         <button type="submit" value="Create new event" id="submit" class="btn btn-success">Submit</button>
 		      </div>
       </div>
 
   </form>
 </div>
+
+<script>
+document.getElementById("submit").onclick = function() {submitFunction()};
+function submitFunction() {
+    document.getElementById("submit");
+    alert("Event created");
+}
+</script>
 
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>

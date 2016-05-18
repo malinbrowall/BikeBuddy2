@@ -2,28 +2,72 @@
 
   var $mapster = $('#map-canvas').mapster(Mapster.map_options);
 
-
-
+//Bike pumps
     $mapster.mapster('addMarker', {
-        location: 'Limhamnsvägen, Brygga 1, Malmo',
+        location: 'Kaptensgatan 8, Malmo',
         event:{
           name: 'click',
           callback: function(){
-            alert('Goal Position');
+            alert('Bike pump');
           }
         },
-        icon: 'https://upload.wikimedia.org/wikipedia/commons/7/7a/Map_marker_icon_%E2%80%93_Nicolas_Mollet_%E2%80%93_Bike_downhill_%E2%80%93_Sports_%E2%80%93_Dark.png'
+        icon: 'https://upload.wikimedia.org/wikipedia/commons/8/84/Map_marker_icon_%E2%80%93_Nicolas_Mollet_%E2%80%93_Borehole_%E2%80%93_Nature_%E2%80%93_default.png'
 });
 
   $mapster.mapster('addMarker', {
-    location: 'Stortorget, Malmo',
+    location: 'Klerkgatan 4, Malmo',
     event:{
       name:'click',
       callback: function(){
-        alert('Start Position')
+        alert('Bike pump')
       }
     },
-    icon: 'https://upload.wikimedia.org/wikipedia/commons/2/28/Map_marker_icon_%E2%80%93_Nicolas_Mollet_%E2%80%93_Bike_rising_%E2%80%93_Sports_%E2%80%93_White.png'
+    icon: 'https://upload.wikimedia.org/wikipedia/commons/8/84/Map_marker_icon_%E2%80%93_Nicolas_Mollet_%E2%80%93_Borehole_%E2%80%93_Nature_%E2%80%93_default.png'
+  });
+
+  $mapster.mapster('addMarker', {
+    location: 'Malmöhusvägen 1, Malmo',
+    event:{
+      name:'click',
+      callback: function(){
+        alert('Bike pump')
+      }
+    },
+    icon: 'https://upload.wikimedia.org/wikipedia/commons/8/84/Map_marker_icon_%E2%80%93_Nicolas_Mollet_%E2%80%93_Borehole_%E2%80%93_Nature_%E2%80%93_default.png'
+  });
+
+  $mapster.mapster('addMarker', {
+    location: 'Limhamnsvägen 27, Malmo',
+    event:{
+      name:'click',
+      callback: function(){
+        alert('Bike pump')
+      }
+    },
+    icon: 'https://upload.wikimedia.org/wikipedia/commons/8/84/Map_marker_icon_%E2%80%93_Nicolas_Mollet_%E2%80%93_Borehole_%E2%80%93_Nature_%E2%80%93_default.png'
+  });
+
+//Toilettes
+  $mapster.mapster('addMarker', {
+    location: 'Stortorget 29, Malmo',
+    event:{
+      name:'click',
+      callback: function(){
+        alert('Toilette')
+      }
+    },
+    icon: 'https://upload.wikimedia.org/wikipedia/commons/f/f2/Map_marker_icon_%E2%80%93_Nicolas_Mollet_%E2%80%93_Female_%E2%80%93_People_%E2%80%93_iOS.png'
+  });
+
+  $mapster.mapster('addMarker', {
+    location: 'Kung Oscras väg 11, Malmo',
+    event:{
+      name:'click',
+      callback: function(){
+        alert('Toilette')
+      }
+    },
+    icon: 'https://upload.wikimedia.org/wikipedia/commons/f/f2/Map_marker_icon_%E2%80%93_Nicolas_Mollet_%E2%80%93_Female_%E2%80%93_People_%E2%80%93_iOS.png'
   });
 
 

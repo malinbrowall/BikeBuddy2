@@ -4,9 +4,9 @@ moment = require('moment'); //config.db holds Orchestrate token
 
 //Get title, date, creator from event.
 exports.getEvent = function(req, res) {
-  var arr = [];
-  var arrKey = [];
-  var imgArr = [];
+
+  var result = [];
+
   db.newSearchBuilder()
   .collection('Event')
   .query('*')
@@ -18,6 +18,7 @@ exports.getEvent = function(req, res) {
           var image = events.body.results[i]["value"].image;
           var key = events.body.results[i].path.key;
 
+<<<<<<< HEAD
           var result = title + '\n' + date + '\n' + 'Created by: ' + creator;
 
           arr.push(result);
@@ -26,6 +27,18 @@ exports.getEvent = function(req, res) {
 
           res.render('home', {user: req.user, title: arr, key: arrKey, img: imgArr});
         });
+=======
+          result[i] = ([{
+            "title" : title,
+            "date" : date,
+            "creator" : creator,
+            "image" : image,
+            "key" : key
+          }]);
+          });
+          res.render('home', {user: req.user, title: result});
+
+>>>>>>> 20acb105b243a44e38560694243bf2cd76717f03
     });
 };
 //Get everything from events database.
@@ -44,8 +57,6 @@ exports.getTopic = function(req, res) {
        title: events.body.results[index]["value"].titles,
        desc: events.body.results[index]["value"].desc,
        date: events.body.results[index]["value"].date,
-       min: events.body.results[index]["value"].min,
-       max: events.body.results[index]["value"].max,
        start: events.body.results[index]["value"].start,
        end: events.body.results[index]["value"].end,
        creator: events.body.results[index]["value"].creator,
