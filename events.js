@@ -18,7 +18,7 @@ exports.getEvent = function(req, res) {
           var image = events.body.results[i]["value"].image;
           var key = events.body.results[i].path.key;
 
-<<<<<<< HEAD
+
           var result = title + '\n' + date + '\n' + 'Created by: ' + creator;
 
           arr.push(result);
@@ -27,7 +27,7 @@ exports.getEvent = function(req, res) {
 
           res.render('home', {user: req.user, title: arr, key: arrKey, img: imgArr});
         });
-=======
+
           result[i] = ([{
             "title" : title,
             "date" : date,
@@ -38,7 +38,6 @@ exports.getEvent = function(req, res) {
           });
           res.render('home', {user: req.user, title: result});
 
->>>>>>> 20acb105b243a44e38560694243bf2cd76717f03
     });
 };
 //Get everything from events database.
