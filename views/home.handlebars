@@ -8,6 +8,17 @@
   </div>
 
 <!--event-->
+{{# each title}}
+<section class="panel-group" >
+	<div class="panel panel-default col-md-7">
+    <p>
+      <img id="image" src ="" width="500" height="250" ></a>
+      </p>
+
+    <div id="demo">{{this}}</div>
+			<p><a id="key" href="" role="button" class="btn btn-default">View details »</a>
+        <a href="/attend/{{../this}}" role="button" class="btn btn-default">Attend »</a>
+        <a href="/unattend/{{../this}}" role="button" class="btn btn-default">Un Attend »</a>
 
 {{# each title}}
 <section class="panel-group" >
@@ -21,11 +32,29 @@
 			<p><a href="/p/{{this.[0].key}}" role="button" class="btn btn-default">{{this.[0].title}} »</a>
         <a href="/attend/{{this.[0].key}}" role="button" id="attend" class="btn btn-default">Attend »</a>
         <a href="/unattend/{{this.[0].key}}" role="button" id="unattend" class="btn btn-default">Un Attend »</a>
+
       </p>
   </div><br>
 	<div class="panel panel-default col-md-7">
 </section>
 {{/each}}
+
+
+
+{{# each img}}
+<script type="text/javascript">
+document.getElementById("image").src= "{{this}}";
+</script>
+
+
+{{/each}}
+
+{{# each key}}
+<script type="text/javascript">
+document.getElementById("key").href = "/p/{{this}}";
+</script>
+{{/each}}
+
 
 <script>
 document.getElementById("attend").onclick = function() {attendFunction()};
@@ -50,7 +79,9 @@ function unattendFunction() {
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
-<div class="fb-comments" data-href="http://ec2-52-18-91-72.eu-west-1.compute.amazonaws.com:3000/" data-numposts="5"></div>
+<div class="fb-comments" data-href="http://ec2-52-18-91-72.eu-west-1.compute.amazonaws.com:3000/#_=_" data-numposts="5"></div>
+
+
 
 {{else}}
 <div class="jumbotron">
