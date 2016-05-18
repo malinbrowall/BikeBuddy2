@@ -8,7 +8,6 @@
   </div>
 
 <!--event-->
-<<<<<<< HEAD
 {{# each title}}
 <section class="panel-group" >
 	<div class="panel panel-default col-md-7">
@@ -20,7 +19,6 @@
 			<p><a id="key" href="" role="button" class="btn btn-default">View details »</a>
         <a href="/attend/{{../this}}" role="button" class="btn btn-default">Attend »</a>
         <a href="/unattend/{{../this}}" role="button" class="btn btn-default">Un Attend »</a>
-=======
 
 {{# each title}}
 <section class="panel-group" >
@@ -34,13 +32,13 @@
 			<p><a href="/p/{{this.[0].key}}" role="button" class="btn btn-default">{{this.[0].title}} »</a>
         <a href="/attend/{{this.[0].key}}" role="button" id="attend" class="btn btn-default">Attend »</a>
         <a href="/unattend/{{this.[0].key}}" role="button" id="unattend" class="btn btn-default">Un Attend »</a>
->>>>>>> 20acb105b243a44e38560694243bf2cd76717f03
+
       </p>
   </div><br>
 	<div class="panel panel-default col-md-7">
 </section>
 {{/each}}
-<<<<<<< HEAD
+
 
 
 {{# each img}}
@@ -56,8 +54,7 @@ document.getElementById("image").src= "{{this}}";
 document.getElementById("key").href = "/p/{{this}}";
 </script>
 {{/each}}
-=======
->>>>>>> 20acb105b243a44e38560694243bf2cd76717f03
+
 
 <script>
 document.getElementById("attend").onclick = function() {attendFunction()};
@@ -82,7 +79,7 @@ function unattendFunction() {
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
-<div class="fb-comments" data-href="http://ec2-52-18-91-72.eu-west-1.compute.amazonaws.com:3000/" data-numposts="5"></div>
+<div class="fb-comments" data-href="http://ec2-52-18-91-72.eu-west-1.compute.amazonaws.com:3000/#_=_" data-numposts="5"></div>
 
 
 
