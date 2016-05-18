@@ -26,7 +26,6 @@ exports.getEvent = function(req, res) {
             "key" : key
           }]);
           });
-          console.log(result);
           res.render('home', {user: req.user, title: result});
 
     });
