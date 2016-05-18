@@ -1,5 +1,5 @@
 {
     "clientID":"1623536321303169",
     "clientSecret":"f92fe1e1ed24a3db34ed74bf3e781107",
-    "callbackURL":"http://ec2-52-50-180-39.eu-west-1.compute.amazonaws.com:3000/auth/facebook/"
+    "callbackURL":"http://ec2-52-18-91-72.eu-west-1.compute.amazonaws.com:3000/auth/facebook"
 }
