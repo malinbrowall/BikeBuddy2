@@ -4,9 +4,9 @@ moment = require('moment'); //config.db holds Orchestrate token
 
 //Get title, date, creator from event.
 exports.getEvent = function(req, res) {
-  var arr = [];
-  var arrKey = [];
-  var imgArr = [];
+
+  var result = [];
+
   db.newSearchBuilder()
   .collection('Event')
   .query('*')
@@ -18,18 +18,17 @@ exports.getEvent = function(req, res) {
           var image = events.body.results[i]["value"].image;
           var key = events.body.results[i].path.key;
 
-          var result = title + '\n' + date + '\n' + 'Created by: ' + creator;
+          result[i] = ([{
+            "title" : title,
+            "date" : date,
+            "creator" : creator,
+            "image" : image,
+            "key" : key
+          }]);
+          });
+          console.log(result);
+          res.render('home', {user: req.user, title: result});
 
-          arr.push(result);
-          arrKey.push(key);
-          imgArr.push(image);
-
-          arr.toString();
-          arrKey.toString();
-          imgArr.toString();
-
-          res.render('home', {user: req.user, title: arr, key: arrKey, img: imgArr});
-        });
     });
 };
 //Get everything from events database.
