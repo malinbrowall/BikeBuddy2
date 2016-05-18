@@ -12,12 +12,13 @@
 {{# each title}}
 <section class="panel-group" >
 	<div class="panel panel-default col-md-7">
-<div id="{{this.[0].title}}"></div>
+<div id=""></div>
       <p>
+        <a>{{this.[0].date}} {{this.[0].creator}}</a>
        <img src = "{{this.[0].image}}" width="400" height="200"/>
      </p>
 
-			<p><a href="/p/{{this.[0].key}}" role="button" class="btn btn-default">View details »</a>
+			<p><a href="/p/{{this.[0].key}}" role="button" class="btn btn-default">{{this.[0].title}} »</a>
         <a href="/attend/{{this.[0].key}}" role="button" class="btn btn-default">Attend »</a>
         <a href="/unattend/{{this.[0].key}}" role="button" class="btn btn-default">Un Attend »</a>
       </p>
