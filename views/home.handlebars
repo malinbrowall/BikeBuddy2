@@ -8,17 +8,6 @@
   </div>
 
 <!--event-->
-{{# each title}}
-<section class="panel-group" >
-	<div class="panel panel-default col-md-7">
-    <p>
-      <img id="image" src ="" width="500" height="250" ></a>
-      </p>
-
-    <div id="demo">{{this}}</div>
-			<p><a id="key" href="" role="button" class="btn btn-default">View details »</a>
-        <a href="/attend/{{../this}}" role="button" class="btn btn-default">Attend »</a>
-        <a href="/unattend/{{../this}}" role="button" class="btn btn-default">Un Attend »</a>
 
 {{# each title}}
 <section class="panel-group" >
@@ -37,22 +26,6 @@
   </div><br>
 	<div class="panel panel-default col-md-7">
 </section>
-{{/each}}
-
-
-
-{{# each img}}
-<script type="text/javascript">
-document.getElementById("image").src= "{{this}}";
-</script>
-
-
-{{/each}}
-
-{{# each key}}
-<script type="text/javascript">
-document.getElementById("key").href = "/p/{{this}}";
-</script>
 {{/each}}
 
 
