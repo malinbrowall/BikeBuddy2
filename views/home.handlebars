@@ -16,23 +16,21 @@
 
 <!--event-->
 
-{{# each key}}
-{{# each ../img}}
+{{# each title}}
 <section class="panel-group" >
 	<div class="panel panel-default col-md-7">
-
+<div id="{{this.[0].title}}"></div>
       <a>
-       <img src = "{{this}}" width="500" height="250"/>
-  </a>
-    <div id="demo"></div>
-			<p><a href="/p/{{../this}}" role="button" class="btn btn-default">View details »</a>
-        <a href="/attend/{{../this}}" role="button" class="btn btn-default">Attend »</a>
-        <a href="/unattend/{{../this}}" role="button" class="btn btn-default">Un Attend »</a>
+       <img src = "{{this.[0].image}}" width="500" height="250"/>
+     </a>
+
+			<p><a href="/p/{{this.[0].key}}" role="button" class="btn btn-default">View details »</a>
+        <a href="/attend/{{this.[0].key}}" role="button" class="btn btn-default">Attend »</a>
+        <a href="/unattend/{{this.[0].key}}" role="button" class="btn btn-default">Un Attend »</a>
       </p>
   </div><br>
 	<div class="panel panel-default col-md-7">
 </section>
-{{/each}}
 {{/each}}
 
 
