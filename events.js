@@ -26,7 +26,6 @@ exports.getEvent = function(req, res) {
             "key" : key
           }]);
           });
-          console.log(result);
           res.render('home', {user: req.user, title: result});
 
     });
@@ -47,8 +46,6 @@ exports.getTopic = function(req, res) {
        title: events.body.results[index]["value"].titles,
        desc: events.body.results[index]["value"].desc,
        date: events.body.results[index]["value"].date,
-       min: events.body.results[index]["value"].min,
-       max: events.body.results[index]["value"].max,
        start: events.body.results[index]["value"].start,
        end: events.body.results[index]["value"].end,
        creator: events.body.results[index]["value"].creator,
