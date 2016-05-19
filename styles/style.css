@@ -58,8 +58,7 @@ background-color: #000;
 
 }
 .panel-group{
-  height: 40%;
-  width: 60%;
+
   padding: 2%;
   margin: auto;
 padding: 10px;
@@ -78,15 +77,20 @@ padding: 10px;
 .form-group label{
   margin-top: 4%;
 }
-.min,.max{
-  width: 55px;
-  float: left;
-  margin-left: 15px;
-}
-.max{
-  margin-top:49px;
-  margin-left: 10px;
 
+.box{
+  float:left;
+  margin-left: 3%;
+  margin-bottom: 3%;
+}
+img{
+  float: left;
+  margin: 1%;
+}
+.buttons{
+  float:right;
+  margin-bottom: 1%;
+  margin-top: 2%;
 }
 
 .min label{
