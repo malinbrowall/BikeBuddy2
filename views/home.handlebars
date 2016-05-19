@@ -4,8 +4,7 @@
     <h1>Events</h1>
     <p id="time"></p>
   </div>
-  <div class="panel panel-default">
-  </div>
+
 
 <!--event-->
 
@@ -17,17 +16,18 @@
         <img src = "{{this.[0].image}}" width="230" height="130"/>
       <div class="box">
         <h3> {{this.[0].title}}</h3>
-        <p>Date: {{this.[0].date}} </p>
-        <p>Attended: {{this.[0].attendants}}</p>
-        <p>Start: {{this.[0].desc}}</p>
+        <p><strong>Date:</strong> {{this.[0].date}} </p>
+        <p><strong>Start:</strong> {{this.[0].start}}  <strong>End:</strong> {{this.[0].end}}
+        <p><strong>Attended:</strong> {{this.[0].attendants}}</p>
+        <p><strong>Description:</strong> {{this.[0].desc}}</p>
+      </div>
 
-     </div>
-
-			<p><a href="/p/{{this.[0].key}}" role="button" class="btn btn-default">{{this.[0].title}} »</a>
+      <div class="buttons">
+			  <a href="/p/{{this.[0].key}}" role="button" class="btn btn-default">{{this.[0].title}} »</a>
         <a href="/attend/{{this.[0].key}}" role="button" id="attend" class="btn btn-default">Attend »</a>
         <a href="/unattend/{{this.[0].key}}" role="button" id="unattend" class="btn btn-default">Un Attend »</a>
+      </div>
 
-      </p>
   </div><br>
 	<div class="panel panel-default col-md-7">
 </section>
