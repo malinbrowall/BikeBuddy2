@@ -9,6 +9,7 @@ exports.getEvent = function(req, res) {
 
   db.newSearchBuilder()
   .collection('Event')
+  .sort('datum', 'asc')
   .query('*')
   .then(function (events){
         events.body.results.forEach(function(obj, i){
@@ -21,6 +22,7 @@ exports.getEvent = function(req, res) {
           var start = events.body.results[i]["value"].start;
           var end = events.body.results[i]["value"].end;
           var desc = events.body.results[i]["value"].desc;
+          var time = events.body.results[i]["value"].time;
 
           result[i] = ([{
             "title" : title,
@@ -31,7 +33,8 @@ exports.getEvent = function(req, res) {
             "attendants" : attendants,
             "start" : start,
             "end" : end,
-            "desc" : desc
+            "desc" : desc,
+            "time" : time
 
           }]);
             });
@@ -53,13 +56,14 @@ exports.getTopic = function(req, res) {
        users: events.body.results,
        title: events.body.results[index]["value"].titles,
        desc: events.body.results[index]["value"].desc,
-       date: events.body.results[index]["value"].date,
+       date: events.body.results[index]["value"].datum,
        start: events.body.results[index]["value"].start,
        end: events.body.results[index]["value"].end,
        creator: events.body.results[index]["value"].creator,
        attendants: events.body.results[index]["value"].attendants,
        key: req.param("id"),
        image : events.body.results[index]["value"].image,
+       time : events.body.results[index]["value"].time
      });
     });
 })
