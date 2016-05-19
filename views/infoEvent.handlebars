@@ -13,9 +13,6 @@
 
 <!--formulär-->
 <div class="box">
-  <div class="col-sm-8">
-  <a href="/attend/{{key}}" role="button" id="attend" class="btn btn-default">Attend »</a>
-  </div>
     <div class="col-sm-8">
       <label>Description:</label>
       {{desc}}
@@ -23,6 +20,11 @@
       <div class="col-sm-8">
         <label>Attending: {{attendants}}</label>
       </div>
+
+      <div class="col-sm-8">
+      <a href="/attend/{{key}}" role="button" id="attend" class="btn btn-default">Attend »</a>
+      </div>
+
       <div class="col-sm-8">
         <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
         <label>Created by {{creator}}</label>
