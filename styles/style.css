@@ -57,17 +57,11 @@ background-color: #000;
   float:left;
 
 }
-.panel-group{
 
+/*event*/
+.panel-group{
   padding: 2%;
   margin: auto;
-padding: 10px;
-
-
-}
-.panel panel-default col-md-7{
-    width: 100%;
-
 }
 .form-group button{
   margin-top: 5%;
@@ -105,4 +99,17 @@ img{
   background-color: #FFF;
 	padding: 1% 1% 0% 1%;
   font-size: 14px;
+}
+
+/* mobil egenskaper */
+@media (max-width: 480px){
+
+.panel-group{
+height: 390px;
+}
+.buttons{
+width:100%;
+
+}
+
 }
