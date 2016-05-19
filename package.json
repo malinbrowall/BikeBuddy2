@@ -4,7 +4,8 @@
   "description": "userAuth\r ========",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "author": "",
   "license": "MIT",
@@ -20,9 +21,14 @@
     "q": "^1.0.1"
   },
 "engines": {
+<<<<<<< HEAD
 "node": "6.2.0",
 "npm": "3.9.2"
 }
+=======
+"node": "6.2.0"
+},
+>>>>>>> 4f77f5dc1872f7d789eadbff52e33751ba49d2a4
   "repository": {
     "type": "git",
     "url": "git+https://github.com/aqwes/BikeBuddy2.git"

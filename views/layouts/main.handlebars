@@ -83,23 +83,22 @@
     {{/if}}
 
 
-<footer>
-	<div class="footer navbar-fixed-bottom">
-	  <div class="container text-center">
-		<p class="pull-left">© 2016 BikeBuddy, Inc. All Rights Reserved</p>
-		<ul class="pull-right list-inline">
-		  <li><a target="_blank" href="/contact">Contact us</a></li>
-		  <li><a target="_blank" href="http://www.malmotown.com"> <img src="malmoIcon.jpg"alt="Malmö stad"width="100" height="25" border="0" /></a></li>
-		</ul>
-	  </div>
-	</div>
-</footer>
-
     <!--where our other templates will insert-->
     {{{body}}}
 
 
     </div> <!-- /container -->
+		<footer>
+			<div class="footer">
+			  <div class="container text-center">
+				<p class="pull-left">© 2016 BikeBuddy, Inc. All Rights Reserved</p>
+				<ul class="pull-right list-inline">
+				  <li><a target="_blank" href="/contact">Contact us</a></li>
+				  <li><a target="_blank" href="http://www.malmotown.com"> <img src="malmoIcon.jpg"alt="Malmö stad"width="100" height="25" border="0" /></a></li>
+				</ul>
+			  </div>
+			</div>
+		</footer>
 
 
     <!-- Bootstrap core JavaScript
@@ -118,7 +117,7 @@ eDisplayMoment.innerHTML = NowMoment.format('MMMM Do YYYY');
 })();
 </script>
 
-<script type="text/javascript">
+<script>
     if (window.location.hash && window.location.hash == '#_=_') {
         if (window.history && history.pushState) {
             window.history.pushState("", document.title, window.location.pathname);

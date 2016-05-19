@@ -4,27 +4,32 @@
     <h1>Events</h1>
     <p id="time"></p>
   </div>
-  <div class="panel panel-default">
-  </div>
+
 
 <!--event-->
 
 {{# each title}}
 <section class="panel-group" >
-	<div class="panel panel-default col-md-7">
-<div id=""></div>
-      <p>
-        <a>{{this.[0].date}} {{this.[0].creator}}</a>
-       <img src = "{{this.[0].image}}" width="400" height="200"/>
-     </p>
+	<div class="panel panel-default col-md-12">
 
-			<p><a href="/p/{{this.[0].key}}" role="button" class="btn btn-default">{{this.[0].title}} »</a>
+
+        <img src = "{{this.[0].image}}" width="230" height="130"/>
+      <div class="box">
+        <h3> {{this.[0].title}}</h3>
+        <p> <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> <strong>Date:</strong> {{this.[0].date}} </p>
+        <p> <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> <strong>Start:</strong> {{this.[0].start}}  <strong>End:</strong> {{this.[0].end}}
+        <p> <span class="glyphicon glyphicon-user" aria-hidden="true"></span> <strong>Attended:</strong> {{this.[0].attendants}}</p>
+        <p><strong>Description:</strong> {{this.[0].desc}}</p>
+      </div>
+
+      <div class="buttons">
+			  <a href="/p/{{this.[0].key}}" role="button" class="btn btn-default">{{this.[0].title}} »</a>
         <a href="/attend/{{this.[0].key}}" role="button" id="attend" class="btn btn-default">Attend »</a>
         <a href="/unattend/{{this.[0].key}}" role="button" id="unattend" class="btn btn-default">Un Attend »</a>
+      </div>
 
-      </p>
   </div><br>
-	<div class="panel panel-default col-md-7">
+
 </section>
 {{/each}}
 

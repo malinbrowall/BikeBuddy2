@@ -17,13 +17,22 @@ exports.getEvent = function(req, res) {
           var creator = events.body.results[i]["value"].creator;
           var image = events.body.results[i]["value"].image;
           var key = events.body.results[i].path.key;
+          var attendants = events.body.results[i]["value"].attendants;
+          var start = events.body.results[i]["value"].start;
+          var end = events.body.results[i]["value"].end;
+          var desc = events.body.results[i]["value"].desc;
 
           result[i] = ([{
             "title" : title,
             "date" : date,
             "creator" : creator,
             "image" : image,
-            "key" : key
+            "key" : key,
+            "attendants" : attendants,
+            "start" : start,
+            "end" : end,
+            "desc" : desc
+
           }]);
             });
           res.render('home', {user: req.user, title: result});
@@ -48,7 +57,9 @@ exports.getTopic = function(req, res) {
        start: events.body.results[index]["value"].start,
        end: events.body.results[index]["value"].end,
        creator: events.body.results[index]["value"].creator,
-       attendants: events.body.results[index]["value"].attendants
+       attendants: events.body.results[index]["value"].attendants,
+       key: req.param("id"),
+       image : events.body.results[index]["value"].image,
      });
     });
 })
