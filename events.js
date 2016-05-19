@@ -62,6 +62,7 @@ exports.getTopic = function(req, res) {
        attendants: events.body.results[index]["value"].attendants,
        key: req.param("id"),
        image : events.body.results[index]["value"].image,
+       time : events.body.results[index]["value"].time
      });
     });
 })
