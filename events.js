@@ -21,6 +21,7 @@ exports.getEvent = function(req, res) {
           var start = events.body.results[i]["value"].start;
           var end = events.body.results[i]["value"].end;
           var desc = events.body.results[i]["value"].desc;
+          var time = events.body.results[i]["value"].time;
 
           result[i] = ([{
             "title" : title,
@@ -31,7 +32,8 @@ exports.getEvent = function(req, res) {
             "attendants" : attendants,
             "start" : start,
             "end" : end,
-            "desc" : desc
+            "desc" : desc,
+            "time" : time
 
           }]);
             });
