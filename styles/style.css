@@ -81,16 +81,19 @@ padding: 10px;
 .box{
   float:left;
   margin-left: 3%;
-  margin-bottom: 3%;
+  margin-bottom: 0%;
 }
+
 img{
   float: left;
   margin: 1%;
+  margin-top: 2%
 }
+
 .buttons{
   float:right;
   margin-bottom: 1%;
-  margin-top: 2%;
+  margin-top: 0%;
 }
 
 .min label{
