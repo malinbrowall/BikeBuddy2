@@ -26,11 +26,13 @@
 			<p><a href="/p/{{this.[0].key}}" role="button" class="btn btn-default">{{this.[0].title}} »</a>
         <a href="/attend/{{this.[0].key}}" role="button" id="attend" class="btn btn-default">Attend »</a>
         <a href="/unattend/{{this.[0].key}}" role="button" id="unattend" class="btn btn-default">Un Attend »</a>
+
       </p>
   </div><br>
 	<div class="panel panel-default col-md-7">
 </section>
 {{/each}}
+
 
 <script>
 document.getElementById("attend").onclick = function() {attendFunction()};
@@ -46,16 +48,7 @@ function unattendFunction() {
 </script>
 
 
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/sv_SE/sdk.js#xfbml=1&version=v2.6&appId=1632167100440091";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
 
-<div class="fb-comments" data-href="http://ec2-52-18-91-72.eu-west-1.compute.amazonaws.com:3000/" data-numposts="5"></div>
 
 {{else}}
 <div class="jumbotron">

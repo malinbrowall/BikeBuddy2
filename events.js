@@ -25,10 +25,9 @@ exports.getEvent = function(req, res) {
             "image" : image,
             "key" : key
           }]);
-          });
+            });
           res.render('home', {user: req.user, title: result});
-
-    });
+          });
 };
 //Get everything from events database.
 exports.getTopic = function(req, res) {
