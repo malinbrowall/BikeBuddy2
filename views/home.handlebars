@@ -11,12 +11,15 @@
 
 {{# each title}}
 <section class="panel-group" >
-	<div class="panel panel-default col-md-7">
-<div id=""></div>
-      <p>
+	<div class="panel panel-default col-md-12">
+
+
+        <img src = "{{this.[0].image}}" width="230" height="130"/>
+      <div class="box">
+        <h3> {{this.[0].title}}</h3>
         <a>{{this.[0].date}} {{this.[0].creator}}</a>
-       <img src = "{{this.[0].image}}" width="400" height="200"/>
-     </p>
+
+     </div>
 
 			<p><a href="/p/{{this.[0].key}}" role="button" class="btn btn-default">{{this.[0].title}} »</a>
         <a href="/attend/{{this.[0].key}}" role="button" id="attend" class="btn btn-default">Attend »</a>
