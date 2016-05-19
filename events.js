@@ -55,7 +55,7 @@ exports.getTopic = function(req, res) {
        users: events.body.results,
        title: events.body.results[index]["value"].titles,
        desc: events.body.results[index]["value"].desc,
-       date: events.body.results[index]["value"].date,
+       date: events.body.results[index]["value"].datum,
        start: events.body.results[index]["value"].start,
        end: events.body.results[index]["value"].end,
        creator: events.body.results[index]["value"].creator,
