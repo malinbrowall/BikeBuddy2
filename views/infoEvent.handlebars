@@ -1,6 +1,6 @@
 
 {{#if user}}
-   <div class="jumbotron text-center">
+    <img src= "{{image}}" width="500" height="250">
     <h1> {{title}} </h1>
     <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
     <label>{{date}}</label><br>
@@ -8,14 +8,11 @@
     <label>Start: {{start}}</label><br>
     <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
     <label>End: {{end}}</label>
-</div>
+</>
 
 
 <!--formulär-->
 <div class="box">
-  <div class="col-sm-8">
-  <a href="/attend/{{key}}" role="button" id="attend" class="btn btn-default">Attend »</a>
-  </div>
     <div class="col-sm-8">
       <label>Description:</label>
       {{desc}}
@@ -23,6 +20,11 @@
       <div class="col-sm-8">
         <label>Attending: {{attendants}}</label>
       </div>
+
+      <div class="col-sm-8">
+      <a href="/attend/{{key}}" role="button" id="attend" class="btn btn-default">Attend »</a>
+      </div>
+
       <div class="col-sm-8">
         <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
         <label>Created by {{creator}}</label>
