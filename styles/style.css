@@ -105,13 +105,10 @@ img{
 @media (max-width: 480px){
 
 .panel-group{
-  height: 390px;
+height: 390px;
 }
 .buttons{
-  width:100%;
-}
-img{
-  margin-left: 15%;
+width:100%;
 }
 
 }

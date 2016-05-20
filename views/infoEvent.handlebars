@@ -1,56 +1,27 @@
-
+<!-- views/infoEvent.handlebars -->
 {{#if user}}
-    <img src= "{{image}}" width="500" height="250">
+
+  <div style="background-image: url( {{image}})" class="jumbotron">
     <h1> {{title}} </h1>
-    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-    <label>{{date}}</label><br>
-    <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
-    <label>{{time}}</label><br>
-    <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
-    <label>Start: {{start}}</label><br>
-    <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
-    <label>End: {{end}}</label>
-</>
+  </div>
+  <div class="col-sm-12 text-center">
 
+    <h3><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Date: {{date}} </h3>
+    <h3><span class="glyphicon glyphicon-time" aria-hidden="true"></span> Time: {{time}}</h3>
+    <h4><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Start: {{start}}</h4>
+    <h4><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> End: {{end}}</h4>
+  </div>
 
-<!--formulär-->
-<div class="box">
-    <div class="col-sm-8">
-      <label>Description:</label>
-      {{desc}}
-      </div>
-      <div class="col-sm-8">
-        <label>Attending: {{attendants}}</label>
-      </div>
+    <div class="col-sm-12 text-center">
 
-      <div class="col-sm-8">
-      <a href="/attend/{{key}}" role="button" id="attend" class="btn btn-default">Attend »</a>
-      </div>
+      <h4><strong>About this event:</strong> {{desc}}</h4>
+      <h4><strong>People attending this event:</strong> {{attendants}}</h4>
+      <a href="/attend/{{key}}" role="button" id="attend" class="btn btn-success">Attend</a>
+    </div>
 
-      <div class="col-sm-8">
-        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-        <label>Created by {{creator}}</label>
-      </div>
+    <p><span class="glyphicon glyphicon-user" aria-hidden="true"></span>This event waw created by {{creator}}</p>
 
-
-</div>
-
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/></link>
 
 
 <!--Om användaren inte är inloggad visas denna-->
-{{else}}
-    <div class="jumbotron">
-  <h1>Sign in</h1>
-  <p>Welcome to Bikebuddy</p>
-  <p>If you want to create a new event, you have to sign in!</p>
-  <p>
-</div>
-<div class="col-md-offset-4">
-    <a href="/auth/facebook/" class="btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-user"></span> Sign in with Facebook</a>
-  </p>
-</div>
-
 {{/if}}

@@ -24,9 +24,9 @@
       </div>
 
       <div class="buttons">
-			  <a href="/p/{{this.[0].key}}" role="button" class="btn btn-default">{{this.[0].title}} »</a>
-        <a href="/attend/{{this.[0].key}}" role="button" id="attend" class="btn btn-default">Attend »</a>
-        <a href="/unattend/{{this.[0].key}}" role="button" id="unattend" class="btn btn-default">Un Attend »</a>
+			  <a href="/p/{{this.[0].key}}" role="button" class="btn btn-default">Read more »</a>
+        <a href="/attend/{{this.[0].key}}" role="button" id="attend" class="btn btn-default">Attend</a>
+        <a href="/unattend/{{this.[0].key}}" role="button" id="unattend" class="btn btn-default">Un Attend</a>
       </div>
 
   </div><br>
@@ -34,7 +34,7 @@
 </section>
 {{/each}}
 
-
+<!--Fattar inte varför dessa inte körs nu?-->
 <script>
 document.getElementById("attend").onclick = function() {attendFunction()};
 function attendFunction() {
