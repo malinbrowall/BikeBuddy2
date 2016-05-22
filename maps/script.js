@@ -150,6 +150,40 @@
     icon: 'https://upload.wikimedia.org/wikipedia/commons/f/f2/Map_marker_icon_%E2%80%93_Nicolas_Mollet_%E2%80%93_Female_%E2%80%93_People_%E2%80%93_iOS.png'
   });
 
+  //Rent a Bike
+  $mapster.mapster('addMarker', {
+    location: 'Malmö centralstation, 211 20 Malmö, Sverige',
+    event:{
+      name:'click',
+      callback: function(){
+        alert('Malmobybike - Malmö centralstation, 211 20 Malmö, Sverige')
+      }
+    },
+    icon: 'https://upload.wikimedia.org/wikipedia/commons/4/40/Map_marker_icon_%E2%80%93_Nicolas_Mollet_%E2%80%93_Bicycle_Shop_%E2%80%93_Stores_%E2%80%93_classic.png?uselang=sv'
+  });
+
+  $mapster.mapster('addMarker', {
+    location: 'Stortorget, Malmö, Sverige',
+    event:{
+      name:'click',
+      callback: function(){
+        alert('Malmobybike - Stortorget, Malmö, Sverige')
+      }
+    },
+    icon: 'https://upload.wikimedia.org/wikipedia/commons/4/40/Map_marker_icon_%E2%80%93_Nicolas_Mollet_%E2%80%93_Bicycle_Shop_%E2%80%93_Stores_%E2%80%93_classic.png?uselang=sv'
+  });
+
+  $mapster.mapster('addMarker', {
+    location: 'Ribersborgs Kallbadhus, Malmö, Sverige',
+    event:{
+      name:'click',
+      callback: function(){
+        alert('Malmobybike - Ribersborgs Kallbadhus, Malmö, Sverige')
+      }
+    },
+    icon: 'https://upload.wikimedia.org/wikipedia/commons/4/40/Map_marker_icon_%E2%80%93_Nicolas_Mollet_%E2%80%93_Bicycle_Shop_%E2%80%93_Stores_%E2%80%93_classic.png?uselang=sv'
+  });
+
 
   if(navigator.geolocation) {
   $mapster.mapster('getCurrentPosition', function(position){
