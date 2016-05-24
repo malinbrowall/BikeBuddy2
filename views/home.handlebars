@@ -10,11 +10,12 @@
 
 {{# each title}}
 <section class="panel-group" >
-	<div class="panel panel-default col-md-12">
 
 
-        <img src = "{{this.[0].image}}" width="230" height="130"/>
+
+
       <div class="box">
+                <img src = "{{this.[0].image}}" width="230" height="130"/>
         <h3> {{this.[0].title}}</h3>
         <p> <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> <strong>Date:</strong> {{this.[0].date}} </p>
         <p> <span class="glyphicon glyphicon-time" aria-hidden="true"></span> <strong>Time:</strong> {{this.[0].time}} </p>
@@ -29,7 +30,6 @@
         <a href="/unattend/{{this.[0].key}}" role="button" id="unattend" class="btn btn-default">Un Attend</a>
       </div>
 
-  </div><br>
 
 </section>
 {{/each}}
