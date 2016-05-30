@@ -1,5 +1,4 @@
-var config = require('./config.json'), //config file contains all tokens and other private info
-  db = require('orchestrate')(process.env.DB_API);
+var  db = require('orchestrate')(process.env.DB_API);
 moment = require('moment'); //config.db holds Orchestrate token
 
 //Get title, date, creator from event.

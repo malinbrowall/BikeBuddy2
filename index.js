@@ -8,9 +8,7 @@ var express = require('express'),
     var dotenv = require('dotenv');
        dotenv.load();
 
-var config = require('./config.json'), //config file contains all tokens and other private info
-    funct = require('./functions.js');
-    fbAuth = require('./fbAuth.json');
+var funct = require('./functions.js'),
     events = require('./events.js');
     db = require('orchestrate')(process.env.DB_API);
 
@@ -39,9 +37,10 @@ passport.deserializeUser(function(obj, done) {
 
 // Use Facebook to login
 passport.use(new FacebookStrategy({
-    clientID: fbAuth.clientID,
-    clientSecret: fbAuth.clientSecret,
-    callbackURL: fbAuth.callbackURL
+clientID:  process.env.FB_CLIENT,
+clientSecret:  process.env.FB_CLIENTPASS,
+callbackURL:  process.env.FB_CALLBACK
+
   },
   function(accessToken, refreshToken, profile, done) {
      process.nextTick(function(id, name) {

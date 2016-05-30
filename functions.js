@@ -1,6 +1,5 @@
 var bcrypt = require('bcryptjs'),
     Q = require('q'),
-    config = require('./config.json'), //config file contains all tokens and other private info
       db = require('orchestrate')(process.env.DB_API); //config.db holds Orchestrate token
 
 exports.fbLogin = function(id, name) {
