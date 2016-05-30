@@ -5,12 +5,14 @@ var express = require('express'),
     moment = require('moment'),
     FacebookStrategy = require('passport-facebook').Strategy;
 
+    var dotenv = require('dotenv');
+       dotenv.load();
 
 var config = require('./config.json'), //config file contains all tokens and other private info
     funct = require('./functions.js');
     fbAuth = require('./fbAuth.json');
     events = require('./events.js');
-    db = require('orchestrate')(config.db);
+    db = require('orchestrate')(process.env.DB_API);
 
 var app = express();
 
